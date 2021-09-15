@@ -1,6 +1,6 @@
-## This is a Solution to control the Cost of the logging for a workspace or a project in GCP Stackdriver 
-### It is based on  ***[Examples of automated cost control responses](https://cloud.google.com/billing/docs/how-to/notify#test-your-cloud-function)***
-#### The solution consists of the components shown in the following diagram:
+### This is a Solution to control the Cost of the logging for a workspace or a project in GCP Stackdriver 
+#### It is based on  ***[Examples of automated cost control responses](https://cloud.google.com/billing/docs/how-to/notify)***
+##### The solution consists of the components shown in the following diagram:
 
 ![solution high level blueprint](GCP-solutions.png)
 
