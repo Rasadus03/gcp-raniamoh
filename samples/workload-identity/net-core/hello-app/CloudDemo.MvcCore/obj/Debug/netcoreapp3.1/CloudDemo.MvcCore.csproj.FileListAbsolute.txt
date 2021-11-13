@@ -1,0 +1,7 @@
+/Users/raniamoh/demo/donet/dotnet-docs-samples/applications/clouddemo/netcore/CloudDemo.MvcCore/obj/Debug/netcoreapp3.1/CloudDemo.MvcCore.csprojAssemblyReference.cache
+/Users/raniamoh/demo/donet/dotnet-docs-samples/applications/clouddemo/netcore/CloudDemo.MvcCore/obj/Debug/netcoreapp3.1/CloudDemo.MvcCore.AssemblyInfoInputs.cache
+/Users/raniamoh/demo/donet/dotnet-docs-samples/applications/clouddemo/netcore/CloudDemo.MvcCore/obj/Debug/netcoreapp3.1/CloudDemo.MvcCore.AssemblyInfo.cs
+/Users/raniamoh/demo/donet/dotnet-docs-samples/applications/clouddemo/netcore/CloudDemo.MvcCore/obj/Debug/netcoreapp3.1/CloudDemo.MvcCore.csproj.CoreCompileInputs.cache
+/Users/raniamoh/demo/donet/dotnet-docs-samples/applications/clouddemo/netcore/CloudDemo.MvcCore/obj/Debug/netcoreapp3.1/CloudDemo.MvcCore.MvcApplicationPartsAssemblyInfo.cache
+/Users/raniamoh/demo/donet/dotnet-docs-samples/applications/clouddemo/netcore/CloudDemo.MvcCore/obj/Debug/netcoreapp3.1/CloudDemo.MvcCore.RazorAssemblyInfo.cache
+/Users/raniamoh/demo/donet/dotnet-docs-samples/applications/clouddemo/netcore/CloudDemo.MvcCore/obj/Debug/netcoreapp3.1/CloudDemo.MvcCore.RazorAssemblyInfo.cs

@@ -1,0 +1,23 @@
+apiVersion: skaffold/v2beta25
+kind: Config
+build:
+  artifacts:
+  - image: us-central1-docker.pkg.dev/raniamoh-playground/raniamoh/java-hello-world
+    jib:
+      args:
+      - -Dmaven.test.skip=true
+  tagPolicy:
+    envTemplate:
+      template: '{{"v1"}}'
+deploy:
+  kubectl:
+    manifests:
+    - ./kubernetes-manifests/**.yaml
+profiles:
+- name: cloudbuild
+  build:
+    googleCloudBuild: {}
+- name: dockerfile
+  build:
+    artifacts:
+    - image: java-hello-world
