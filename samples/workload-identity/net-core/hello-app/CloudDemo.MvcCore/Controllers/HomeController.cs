@@ -67,7 +67,9 @@ namespace CloudDemo.MvcCore.Controllers
                 })
             };
 
-            SignJwtResponse signResponse = await iamClient.Projects.ServiceAccounts.SignJwt(signRequest, idTokenPayload.Email).ExecuteAsync();
+            SignJwtResponse signResponse = await iamClient.Projects.ServiceAccounts.SignJwt(
+                signRequest,
+                $"projects/-/serviceAccounts/{idTokenPayload.Email}").ExecuteAsync();
 
             string message = " =============================================";
             message += Environment.NewLine;
