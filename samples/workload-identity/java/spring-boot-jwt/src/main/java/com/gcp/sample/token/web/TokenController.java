@@ -1,5 +1,5 @@
 
-package cloudcode.helloworld.web;
+package com.gcp.sample.token.web;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.google.api.client.json.webtoken.JsonWebSignature;
@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Defines a controller to handle HTTP requests.
  */
 @Controller
-public final class HelloWorldController {
+public final class TokenController {
 
   /**
    * Create an endpoint for the landing page

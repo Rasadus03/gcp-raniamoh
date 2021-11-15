@@ -2,7 +2,7 @@ apiVersion: skaffold/v2beta25
 kind: Config
 build:
   artifacts:
-  - image: xxxxx-docker.pkg.dev/xxxx/xxxx/jwt
+  - image: xxxxxxxx/jwt
     jib:
       args:
       - -Dmaven.test.skip=true

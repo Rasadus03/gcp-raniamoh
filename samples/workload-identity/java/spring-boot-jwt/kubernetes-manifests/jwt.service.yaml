@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: dotnetcore
+  namespace: xxxxx
   name: jwt-external
 spec:
   type: LoadBalancer
