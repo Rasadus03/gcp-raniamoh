@@ -8,7 +8,7 @@ metadata:
     app: jwt
 spec:
   containers:
-  - image: us-central1-docker.pkg.dev/raniamoh-playground/raniamoh/jwt:v1
+  - image: xxxxx-docker.pkg.dev/xxx/xxxx/jwt:v1
     name: server
     ports:
     - containerPort: 8080
