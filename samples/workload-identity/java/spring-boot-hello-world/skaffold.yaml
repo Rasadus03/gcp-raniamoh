@@ -2,7 +2,7 @@ apiVersion: skaffold/v2beta25
 kind: Config
 build:
   artifacts:
-  - image: us-central1-docker.pkg.dev/raniamoh-playground/raniamoh/java-hello-world
+  - image: us-central1-docker.pkg.dev/raniamoh-playground/raniamoh/jwt
     jib:
       args:
       - -Dmaven.test.skip=true
@@ -20,4 +20,4 @@ profiles:
 - name: dockerfile
   build:
     artifacts:
-    - image: java-hello-world
+    - image: jwt
