@@ -1,11 +1,6 @@
 # CloudDemo.MvcCore
 
-`CloudDemo.MvcCore` is a lightweight sample application that uses 
-[ASP.NET MVC Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc)
-on .NET Core. 
-
-For further details on how you can deploy the sample application, see
-[Creating a CI/CD pipeline with Azure Pipelines and Google Kubernetes Engine](https://cloud.google.com/solutions/creating-cicd-pipeline-vsts-kubernetes-engine).
+`CloudDemo.MvcCore` is a lightweight sample application to display the jwt token using workload identity.
 
 ## Prerequisites
 
@@ -45,11 +40,11 @@ these components preinstalled.
 
 1. Tag and push the image:
 
-    `docker tag us-central1-docker.pkg.dev/raniamoh-playground/raniamoh/clouddemo-netcore`
+    `docker tag xxxx-docker.pkg.dev/xxxxx/xxxx/clouddemo-netcore`
 
 1. Push the image to Container Registry:
 
-    `docker push us-central1-docker.pkg.dev/raniamoh-playground/raniamoh/clouddemo-netcore`
+    `docker push xxxxx-docker.pkg.dev/xxx/xxx/clouddemo-netcore`
 
 ## Deploy to Kubernetes Engine
 
