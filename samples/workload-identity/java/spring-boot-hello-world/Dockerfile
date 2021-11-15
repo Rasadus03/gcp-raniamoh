@@ -24,4 +24,4 @@ FROM openjdk:11-jre-slim
 COPY --from=build-env /app/target/ /app/
 
 # Starts java app with debugging server at port 5005.
-CMD ["java", "-jar", "/app/hello-world-1.0.0.jar"]
+CMD ["java", "-jar", "/app/jwt-1.0.0.jar"]
