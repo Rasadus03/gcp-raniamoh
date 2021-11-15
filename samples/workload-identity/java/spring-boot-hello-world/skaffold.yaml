@@ -2,7 +2,7 @@ apiVersion: skaffold/v2beta25
 kind: Config
 build:
   artifacts:
-  - image: us-central1-docker.pkg.dev/raniamoh-playground/raniamoh/jwt
+  - image: xxxxx-docker.pkg.dev/xxxx/xxxx/jwt
     jib:
       args:
       - -Dmaven.test.skip=true
