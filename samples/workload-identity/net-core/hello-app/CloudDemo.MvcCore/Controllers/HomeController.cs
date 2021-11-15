@@ -44,15 +44,15 @@ namespace CloudDemo.MvcCore.Controllers
 
         public static async Task<string> LoadJwtToken()
         {
-            ICredential credentials = await GoogleCredential.GetApplicationDefaultAsync();
+            GoogleCredential credentials = await GoogleCredential.GetApplicationDefaultAsync();
 
             IAMCredentialsService iamClient = new IAMCredentialsService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = credentials
             });
 
-            var accessToken = await credentials.GetAccessTokenForRequestAsync("https://other-service.travix.com");
-            var accessTokenPayload = await JsonWebSignature.VerifySignedTokenAsync<CustomPayload>(accessToken);
+            var idToken = await credentials.GetOidcTokenAsync(OidcTokenOptions.FromTargetAudience("http://will.be.ignored.travix.com"));
+            var idTokenPayload = await JsonWebSignature.VerifySignedTokenAsync<CustomPayload>(await idToken.GetAccessTokenAsync());
 
             SignJwtRequest signRequest = new SignJwtRequest
             {
@@ -62,22 +62,22 @@ namespace CloudDemo.MvcCore.Controllers
                     sub = "app1-gsa@raniamoh-playground.iam.gserviceaccount.com",
                     aud = "http://some-service.travix.com",
                     iat = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
-                    exp = accessTokenPayload.ExpirationTimeSeconds,
+                    exp = idTokenPayload.ExpirationTimeSeconds,
                     scope = "https://www.googleapis.com/auth/cloud-platform"
                 })
             };
 
-            SignJwtResponse signResponse = await iamClient.Projects.ServiceAccounts.SignJwt(signRequest, accessTokenPayload.Email).ExecuteAsync();
+            SignJwtResponse signResponse = await iamClient.Projects.ServiceAccounts.SignJwt(signRequest, idTokenPayload.Email).ExecuteAsync();
 
             string message = " =============================================";
             message += Environment.NewLine;
             message += " Account is ";
-            message += accessTokenPayload.Email;
+            message += idTokenPayload.Email;
             message += Environment.NewLine;
             message += " =============================================";
             message += Environment.NewLine;
-            message += " access token is ";
-            message += accessToken;
+            message += " id token is ";
+            message += idToken;
             message += Environment.NewLine;
             message += " =============================================";
             message += Environment.NewLine;
