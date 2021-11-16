@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  namespace: xxxxx
+  namespace: javaspringboot
   name: jwt
   labels:
     app: jwt
