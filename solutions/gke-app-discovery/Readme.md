@@ -1,6 +1,7 @@
-### This is a Solution to discover the running workloades and undrestand its topology for GKE clusters that are not runing any services mesg soln or ASM:
+## <font color="#8b008b"> This is a Solution to discover the running workloads and understand its topology for GKE clusters that are not running any services mesh soln or ASM:
+</font>
 
-##### The First alternative is via infranode visibility:
+###<font color="#ff1493"> The First alternative is via infranode visibility: </font>
 
 Here are the guidelines for implementing the solution:
 
@@ -10,14 +11,14 @@ Here are the guidelines for implementing the solution:
     - c) Enable cluster logging and monitoring (especially for workload).
 
 2. Navigate to Cloud Logging and create a sync with to include the vpc flow logs :
-    - a) Create a log sink to BQ with inclusion filter = logName:("projects/PROJECT_ID/logs/compute.googleapis.com%2Fvpc_flows"). You may choose to add there a filter on the cluster name via jsonPayload.src_gke_details.cluster.cluster_name or jsonPayload.dest_gke_details.cluster.cluster_name
+    - a) Create a log sink to BQ with inclusion filter = logName:("projects/<font color="red">**PROJECT_ID**</font>/logs/compute.googleapis.com%2Fvpc_flows"). You may choose to add there a filter on the cluster name via jsonPayload.src_gke_details.cluster.cluster_name or jsonPayload.dest_gke_details.cluster.cluster_name
     - b) Make sure to map the sync to a table name in a multi regional dataset in BigQuery.
    
 3. Navigate to Big query to discover the dependencies from the following queries:
     - a) Query pod to pod communication ***[vpc-flow-bq-flow-query.sql](bq-resources/vpc-flow-bq-flow-query.sql)***
     - b) Identify the public service communication via inquiring their ips  ***[vpc-flow-bq-public-ip-service-query.sql](bq-resources/vpc-flow-bq-public-ip-service-query.sql)***
 
-##### The Second alternative is via DataPlane V2 network logging policy:
+##### <font color="#ff1493"> The Second alternative is via DataPlane V2 network logging policy: </font>
 
 Here are the guidelines for implementing the solution:
 
@@ -30,8 +31,12 @@ Here are the guidelines for implementing the solution:
 
 2. Navigate to Cloud Logging and create a sync with to include the vpc flow logs :
    - a) Create a log sink to BQ with inclusion filter = resource.type="k8s_node"
-     log_name="projects/PROJECT_ID/logs/policy-action". You may choose to add there a filter on the cluster name and/or location via resource.labels.location or/ and resource.labels.cluster_name
+     log_name="projects/<font color="red">**PROJECT_ID**</font>/logs/policy-action". You may choose to add there a filter on the cluster name and/or location via resource.labels.location or/ and resource.labels.cluster_name
    - b) Make sure to map the sync to a table name in a multi regional dataset in BigQuery.
 
 3. Navigate to Big query to discover the dependencies from the following queries:
    - a) Query app communication flow ***[net-policy-actions-bq-queries.sql](bq-resources/net-policy-actions-bq-queries.sql)***
+
+##### <font color="#ff1493"> The third alternative is via Object Browser in K8s console, please check the below screenshot for guidance </font>
+
+![GKE Console Object Browser](GKE-Object-Browser.png)
