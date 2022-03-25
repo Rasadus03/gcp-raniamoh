@@ -1,7 +1,7 @@
 ## <font color="#8b008b"> This is a Solution to discover the running workloads and understand its topology for GKE clusters that are not running any services mesh soln or ASM:
 </font>
 
-###<font color="#ff1493"> The First alternative is via infranode visibility: </font>
+### <font color="#ff1493"> The First alternative is via infranode visibility: </font>
 
 Here are the guidelines for implementing the solution:
 
