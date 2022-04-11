@@ -1,0 +1,9 @@
+apiVersion: core.cnrm.cloud.google.com/v1beta1
+kind: ConfigConnectorContext
+metadata:
+  # you can only have one ConfigConnectorContext per namespace
+  name: configconnectorcontext.core.cnrm.cloud.google.com
+  namespace: admin-kcc
+spec:
+  # Replace Hosting_Project_ID with the Project id hosting the KCC Admin cluster
+  googleServiceAccount: "admin-krm-gsa@Hosting_Project_ID.iam.gserviceaccount.com"
