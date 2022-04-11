@@ -8,6 +8,7 @@ Here are the guidelines for implementing the solution in your GCP environment:
 
 1. Setup a GKE cluster and make sure Workload identity and monitoring are enabled following the guidelines in ***[Preprequisite](https://cloud.google.com/config-connector/docs/how-to/advanced-install#before_you_begin)***
 _________________ 
+
 **Install KCC Manually using K8Operator**
 
 2. Manually install the KCC Operator:
@@ -21,7 +22,9 @@ _________________
     kubectl apply -f kcc.yaml
    ```
 _________________
+
 **Provision Admin Tenant**
+
 4. Create an admin NS call it "admin-kcc" for provisioning Projects and folders
    ```
     kubectl create namespace admin-kcc
@@ -61,7 +64,9 @@ _________________
 13. Create the second project by applying ***[org-krm-folder-krm-project2](admin/org-krm-folder-krm-project2)***
 
 _________________
+
 **Provision Project-1 Tenant**
+
 14. Create a project-1 NS call it "project-1" for provisioning Projects and folders
     ```
     kubectl create namespace project-1
@@ -103,7 +108,9 @@ _________________
 24. Create GKE Cluster in project 1 project by applying ***[project1-krm-gke-cluster-cluster1.yaml](project-1/project1-krm-gke-cluster-cluster1.yaml)***
 
 _________________
+
 **Provision Project-2 Tenant**
+
 25. Create a project-2 NS call it "project-2" for provisioning Projects and folders
     ```
     kubectl create namespace project-2
