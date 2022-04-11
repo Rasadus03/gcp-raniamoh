@@ -1,7 +1,7 @@
 ## <font color="#8b008b"> This is a Solution to discover the running workloads and understand its topology for GKE clusters that are not running any services mesh soln or ASM:
 </font>
 
-###<font color="#ff1493"> The First alternative is via infranode visibility: </font>
+### <font color="#ff1493"> The First alternative is via infranode visibility: </font>
 
 Here are the guidelines for implementing the solution:
 
@@ -18,7 +18,7 @@ Here are the guidelines for implementing the solution:
     - a) Query pod to pod communication ***[vpc-flow-bq-flow-query.sql](bq-resources/vpc-flow-bq-flow-query.sql)***
     - b) Identify the public service communication via inquiring their ips  ***[vpc-flow-bq-public-ip-service-query.sql](bq-resources/vpc-flow-bq-public-ip-service-query.sql)***
 
-##### <font color="#ff1493"> The Second alternative is via DataPlane V2 network logging policy: </font>
+### <font color="#ff1493"> The Second alternative is via DataPlane V2 network logging policy: </font>
 
 Here are the guidelines for implementing the solution:
 
@@ -37,6 +37,6 @@ Here are the guidelines for implementing the solution:
 3. Navigate to Big query to discover the dependencies from the following queries:
    - a) Query app communication flow ***[net-policy-actions-bq-queries.sql](bq-resources/net-policy-actions-bq-queries.sql)***
 
-##### <font color="#ff1493"> The third alternative is via Object Browser in K8s console, please check the below screenshot for guidance </font>
+### <font color="#ff1493"> The third alternative is via Object Browser in K8s console, please check the below screenshot for guidance </font>
 
 ![GKE Console Object Browser](GKE-Object-Browser.png)
