@@ -15,16 +15,20 @@ See our  [Using Cloud Storage FUSE with Cloud Run tutorial](https://cloud.google
 
 1. mvn clean install
 2. Create Service account with Object View access
-   ``` gcloud iam service-accounts create fs-identity 
+   ``` 
+       gcloud iam service-accounts create fs-identity 
        gcloud projects add-iam-policy-binding PROJECT_ID \
          --member "serviceAccount:fs-identity@PROJECT_ID.iam.gserviceaccount.com" \
-         --role "roles/storage.objectViewer" ```
+         --role "roles/storage.objectViewer" 
+   ```
 3. You can either deploy for the docker or source, to deploy from source directly:
 
-   ``` rm Dockerfile 
+   ``` 
+       rm Dockerfile 
        cp gcsfuse.Dockerfile Dockerfile 
        gcloud beta run deploy  secure-pdf-gcs --source . \ 
           --execution-environment gen2 \ 
           --allow-unauthenticated \ 
           --service-account fs-identity \ 
-          --update-env-vars BUCKET=BUCKET_NAME ```
+          --update-env-vars BUCKET=BUCKET_NAME 
+    ```
