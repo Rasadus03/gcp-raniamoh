@@ -5,7 +5,7 @@ if [[ -z "${PROJECT_ID}" ]]; then
   return
 fi
 
-PROJECT_ID
+export PROJECT_ID=raniamoh-playground
 # sets the current project for gcloud
 gcloud config set project $PROJECT_ID
 # Enables various APIs you'll need
@@ -23,8 +23,8 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
     --format="value(projectNumber)")-compute@developer.gserviceaccount.com \
     --role="roles/container.developer"
 # creates the Artifact Registry repo
-gcloud artifacts repositories create pop-stats --location=us-central1 \
---repository-format=docker
+#gcloud artifacts repositories create pop-stats --location=us-central1 \
+#--repository-format=docker
 # customize the clouddeploy.yaml 
 sed -e "s/project-id-here/${PROJECT_ID}/" clouddeploy.yaml > clouddeploy.yaml
 # creates the Google Cloud Deploy pipeline
