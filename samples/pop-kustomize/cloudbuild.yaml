@@ -4,12 +4,12 @@ steps:
   # Build and tag using commit sha
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '.', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/pop-stats/pop-stats:${COMMIT_SHA}', '-f', 'Dockerfile']
-    dir: 'app'
+    dir: 'samples/pop-kustomize/app'
   # Run api tests
   - name: 'us-central1-docker.pkg.dev/$PROJECT_ID/pop-stats/pop-stats:${COMMIT_SHA}'
     entrypoint: python
     args: ["api_tests.py"]
-    dir: 'app'
+    dir: 'samples/pop-kustomize/app'
   # Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/pop-stats/pop-stats:${COMMIT_SHA}']
