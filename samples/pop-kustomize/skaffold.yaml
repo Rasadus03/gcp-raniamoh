@@ -8,13 +8,13 @@ build:
 #    push: false
   artifacts:
   - image: pop-stats
-    context: app
+    context: samples/pop-kustomize/app
     docker:
       dockerfile: Dockerfile
 deploy:
   kustomize:
     paths: 
-      - k8s/overlays/dev
+      - samples/pop-kustomize/k8s/overlays/dev
 portForward:
 - resourceType: deployment
   resourceName: pop-stats
@@ -25,9 +25,9 @@ profiles:
     deploy:
       kustomize:
         paths: 
-          - k8s/overlays/staging
+          - samples/pop-kustomize/k8s/overlays/staging
   - name: prod
     deploy:
       kustomize:
         paths: 
-          - k8s/overlays/prod
+          - samples/pop-kustomize/k8s/overlays/prod
