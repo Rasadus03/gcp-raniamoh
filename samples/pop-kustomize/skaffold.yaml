@@ -14,7 +14,7 @@ build:
 deploy:
   kustomize:
     paths: 
-      - samples/pop-kustomize/k8s/overlays/dev
+      - k8s/overlays/dev
 portForward:
 - resourceType: deployment
   resourceName: pop-stats
@@ -25,9 +25,9 @@ profiles:
     deploy:
       kustomize:
         paths: 
-          - samples/pop-kustomize/k8s/overlays/staging
+          - k8s/overlays/staging
   - name: prod
     deploy:
       kustomize:
         paths: 
-          - samples/pop-kustomize/k8s/overlays/prod
+          - k8s/overlays/prod

@@ -5,7 +5,7 @@ if [[ -z "${PROJECT_ID}" ]]; then
   return
 fi
 
-export PROJECT_ID=raniamoh-playground
+export PROJECT_ID=raniamoh-demo-playg-sharedvpc
 # sets the current project for gcloud
 gcloud config set project $PROJECT_ID
 # Enables various APIs you'll need
