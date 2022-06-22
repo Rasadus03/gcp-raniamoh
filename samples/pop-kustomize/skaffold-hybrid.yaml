@@ -7,7 +7,7 @@ build:
 #  local: 
 #    push: false
   artifacts:
-  - image: pop-stats
+  - image: pop-stats-hyb
     context: samples/pop-kustomize/app
     docker:
       dockerfile: Dockerfile
@@ -21,7 +21,6 @@ portForward:
   port: 8080 
   localPort: 8080
 profiles:
-  - name: dev
   - name: staging
     deploy:
       kustomize:
