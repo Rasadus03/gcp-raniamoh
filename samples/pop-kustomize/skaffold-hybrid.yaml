@@ -14,10 +14,10 @@ build:
 deploy:
   kustomize:
     paths: 
-      - k8s/overlays/dev
+      - k8s-hybrid/overlays/dev
 portForward:
 - resourceType: deployment
-  resourceName: pop-stats
+  resourceName: pop-stats-hyb
   port: 8080 
   localPort: 8080
 profiles:
@@ -25,12 +25,9 @@ profiles:
     deploy:
       kustomize:
         paths: 
-          - k8s/overlays/staging
+          -k8s-hybrid/overlays/staging
   - name: prod
     deploy:
       kustomize:
         paths: 
-          - k8s/overlays/prod
-
------
-
+          - k8s-hybrid/overlays/prod
