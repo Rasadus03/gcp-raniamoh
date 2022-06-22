@@ -21,9 +21,15 @@ kind: Target
 metadata:
   name: dev-anthos
 description: dev cluster
-requireApproval: false
 anthosCluster:
   membership: projects/raniamoh-playground/locations/global/memberships/devops-demo-admin
+executionConfigs:
+  - privatePool:
+      workerPool: projects/raniamoh-playground/locations/us-central1/workerPools/anthos
+      serviceAccount: 189908348872@cloudbuild.gserviceaccount.com
+    usages:
+      - RENDER
+      - DEPLOY
 ---
 
 apiVersion: deploy.cloud.google.com/v1
@@ -31,7 +37,6 @@ kind: Target
 metadata:
   name: staging-anthos
 description: staging cluster
-requireApproval: false
 anthosCluster:
   membership: projects/raniamoh-playground/locations/global/memberships/cloud-demo-fleet-membership
 ---
