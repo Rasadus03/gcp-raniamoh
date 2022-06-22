@@ -14,7 +14,7 @@ build:
 deploy:
   kustomize:
     paths: 
-      - k8s-hybrid/overlays/dev
+      - k8shybrid/overlays/dev
 portForward:
 - resourceType: deployment
   resourceName: pop-stats-hyb
@@ -25,9 +25,9 @@ profiles:
     deploy:
       kustomize:
         paths: 
-          -k8s-hybrid/overlays/staging
+          -k8shybrid/overlays/staging
   - name: prod-anthos
     deploy:
       kustomize:
         paths: 
-          - k8s-hybrid/overlays/prod
+          - k8shybrid/overlays/prod
