@@ -1,0 +1,37 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: hybrib-pipeline
+build:
+# Uncomment if you're using minikube for local dev and don't want to push to Artifact Registry
+#  local: 
+#    push: false
+  artifacts:
+  - image: pop-stats
+    context: samples/pop-kustomize/app
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kustomize:
+    paths: 
+      - k8s/overlays/dev
+portForward:
+- resourceType: deployment
+  resourceName: pop-stats
+  port: 8080 
+  localPort: 8080
+profiles:
+  - name: dev
+  - name: staging
+    deploy:
+      kustomize:
+        paths: 
+          - k8s/overlays/staging
+  - name: prod
+    deploy:
+      kustomize:
+        paths: 
+          - k8s/overlays/prod
+
+-----
+

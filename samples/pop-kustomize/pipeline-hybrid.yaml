@@ -1,0 +1,46 @@
+# replace "raniamoh-demo-playg-sharedvpc" in the three targets below with your actual project(s)
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: hybrib-pipeline
+serialPipeline:
+  stages:
+    - targetId: dev
+      profiles:
+        - dev
+    - targetId: staging
+      profiles:
+        - stagging
+    - targetId: prod
+      profiles:
+        - prod
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: dev
+description: dev cluster
+requireApproval: false
+anthosCluster:
+  membership: projects/raniamoh-playground/locations/global/memberships/devops-demo-admin
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: staging
+description: staging cluster
+requireApproval: false
+anthosCluster:
+  membership: projects/raniamoh-playground/locations/global/memberships/cloud-demo-fleet-membership
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: prod
+description: prod cluster
+requireApproval: true
+anthosCluster:
+  membership: projects/raniamoh-playground/locations/global/memberships/regional-clusterwi-region
