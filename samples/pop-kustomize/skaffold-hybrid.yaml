@@ -11,22 +11,23 @@ build:
     context: samples/pop-kustomize/app
     docker:
       dockerfile: Dockerfile
-deploy:
-  kustomize:
-    paths: 
-      - k8shybrid/overlays/dev
 portForward:
 - resourceType: deployment
   resourceName: pop-stats-hyb
   port: 8080 
   localPort: 8080
 profiles:
-  - name: staging-anthos
+  - name: dev
+    deploy:
+      kustomize:
+        paths:
+          - k8shybrid/overlays/dev
+  - name: stagging
     deploy:
       kustomize:
         paths: 
           -k8shybrid/overlays/staging
-  - name: prod-anthos
+  - name: prod
     deploy:
       kustomize:
         paths: 
