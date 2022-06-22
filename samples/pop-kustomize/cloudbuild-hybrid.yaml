@@ -23,7 +23,7 @@ steps:
         "--region", "us-central1",
         "--annotations", "commitId=${REVISION_ID}",
         "--skaffold-file", "samples/pop-kustomize/skaffold-hybrid.yaml",
-        "--images", "pop-stats=us-central1-docker.pkg.dev/$PROJECT_ID/pop-stats-hyb/pop-stats-hyb:${COMMIT_SHA}"
+        "--images", "pop-stats-hyb=us-central1-docker.pkg.dev/$PROJECT_ID/pop-stats-hyb/pop-stats-hyb:${COMMIT_SHA}"
       ]
 images:
 - us-central1-docker.pkg.dev/$PROJECT_ID/pop-stats-hyb/pop-stats-hyb:${COMMIT_SHA}

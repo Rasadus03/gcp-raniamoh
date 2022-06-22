@@ -21,12 +21,12 @@ portForward:
   port: 8080 
   localPort: 8080
 profiles:
-  - name: staging
+  - name: staging-anthos
     deploy:
       kustomize:
         paths: 
           -k8s-hybrid/overlays/staging
-  - name: prod
+  - name: prod-anthos
     deploy:
       kustomize:
         paths: 
