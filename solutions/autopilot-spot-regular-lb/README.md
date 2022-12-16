@@ -9,7 +9,7 @@
 The solution offers 2 options:
 
 A. Using a path ingress, using the below steps:
-1. Please follow [Build and deploy Applications](README.md#build-app-build-and-deploy-applications) to build the application container and deploy the spot and non-Spot instances
+1. Please follow [Build and deploy Applications](#build-and-deploy-applications) to build the application container and deploy the spot and non-Spot instances
 2. Now deploy the 2 services as cluster IP with Container load balancer annotation to have the associated NEG got created:
  ```
         kubectl apply -f service-1.yaml
@@ -61,7 +61,7 @@ B. Using a path route weight, using the below steps:
 
 ![solution high level blueprint](LB Regular Spot_Autopilot-Option2.png)
 
-1. Please follow [Build and deploy Applications](README.md#build-app-build-and-deploy-applications) to build the application container and deploy the spot and non-Spot instances
+1. Please follow [Build and deploy Applications](#build-and-deploy-applications) to build the application container and deploy the spot and non-Spot instances
 
 2. Now deploy  a single service as cluster IP with Container load balancer annotation to have the associated NEG got created:
  ```
@@ -77,7 +77,7 @@ B. Using a path route weight, using the below steps:
 
 ![solution high level blueprint](LB Regular Spot_Autopilot-Option3.png)
 
-1. Please follow [Build and deploy Applications](README.md#build-app-build-and-deploy-applications) to build the application container and deploy the spot and non-Spot instances
+1. Please follow [Build and deploy Applications](#build-and-deploy-applications) to build the application container and deploy the spot and non-Spot instances
 
 2. Now deploy  a single service as a Load balancer service:
  ```
@@ -88,7 +88,7 @@ B. Using a path route weight, using the below steps:
 
 ![solution high level blueprint](LB Regular Spot_Autopilot-Option4.png)
 
-1. Please follow [Build and deploy Applications](README.md#build-app-build-and-deploy-applications) to build the application container and deploy the spot and non Spot instances
+1. Please follow [Build and deploy Applications](#build-and-deploy-applications) to build the application container and deploy the spot and non Spot instances
 
 2. Now deploy  a single service as nodeport for loadbalancing between both app instances types:
  ```
