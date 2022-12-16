@@ -1,7 +1,7 @@
 # Autopilot Load-balancing between spot and regular workload
 
 ### There are multiple option for loadbalancing between spot and non spot workloads:
-####1. Using Global Load balancer and multiple services:
+#### 1. Using Global Load balancer and multiple services:
 
 ![solution high level blueprint](LB Regular Spot_Autopilot-Option1.png)
 
@@ -57,7 +57,7 @@ B. Using a path route weight, using the below steps:
 ```
 5. Please wait for the load balancer to be created and then you can use the public ip associated to the GLB to route to the app via ***[http://{LOAD_BALANCER_IP}/](http://{LOAD_BALANCER_IP}/)***  for checking the app.
 
-####2. Using Global Load balancer and one single service and container native load balancer using the  below steps:
+#### 2. Using Global Load balancer and one single service and container native load balancer using the  below steps:
 
 ![solution high level blueprint](LB Regular Spot_Autopilot-Option2.png)
 
@@ -73,7 +73,7 @@ B. Using a path route weight, using the below steps:
  ```
 4. Please wait for the ingress to be created and then you can use the public ip associated to the GLB to route to the app via ***[http://{LOAD_BALANCER_IP}/](http://{LOAD_BALANCER_IP}/)***
 
-####3. Using  one loadbalancer single services using the  below steps:
+#### 3. Using  one loadbalancer single services using the  below steps:
 
 ![solution high level blueprint](LB Regular Spot_Autopilot-Option3.png)
 
@@ -84,7 +84,7 @@ B. Using a path route weight, using the below steps:
         kubectl apply -f service.yaml
  ```
 4. Please wait for the service to be created and then you can use the public ip associated to the service to route to the app via ***[http://{LOAD_BALANCER_IP}/](http://{LOAD_BALANCER_IP}/)***
-####4. Using Global Load balancer and one single node port services using the  below steps::
+#### 4. Using Global Load balancer and one single node port services using the  below steps::
 
 ![solution high level blueprint](LB Regular Spot_Autopilot-Option4.png)
 
