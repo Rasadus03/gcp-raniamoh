@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang=en xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset=utf-8>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Congratulations on deploying your Kubernetes app</title>
+  <link href="https://fonts.googleapis.com/css?family=comic&amp;sans&amp;MS" rel="preload" as="font">
+  <link
+      href="img/kubernetes-engine-icon.png"
+      rel="icon"
+      type="image/png"
+  />
+  <style>
+    body {
+      font-family: 'Comic Sans MS', 'Roboto', sans-serif;
+      font-display: fallback;
+      background: url('img/cloud_bg.svg');
+      background-size: cover;
+      background-position: left;
+      background-attachment: fixed;
+      line-height: 2;
+      white-space: pre-wrap;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: lighter;
+      margin-bottom: 0px;
+    }
+
+    h2 {
+      font-size: 12px;
+      font-weight: normal;
+      margin-top: 4px;
+    }
+
+    h3 {
+      font-size: 10px;
+      margin-bottom: 0px;
+    }
+
+    .next {
+      font-size: 8px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .container {
+      max-width: 3000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero {
+      margin-top: 0px;
+    }
+
+    .hero .logo {
+      width: 140px;
+      float: left;
+      margin-right: 32px;
+    }
+
+    .hero .message {
+      font-size: 14px;
+      text-align: left;
+      margin-bottom: 0px;
+      color: deeppink;
+    }
+
+    .details {
+      clear: both;
+      height: 400px;
+      line-height: 2;
+    }
+
+    .callout {
+      font-size: 14px;
+      background-color: #E8F0FE;
+      width: 100%;
+      color: #1967D2;
+      font-weight: 600;
+      padding: 16px 24px;
+      line-height: 2;
+    }
+
+    .callout label {
+      display: block;
+      padding-left: 2em;
+      text-indent: -2em;
+    }
+
+    .code {
+      font-family: 'Comic Sans MS', 'Roboto Mono', Courier, monospace;
+      color: #A30038;
+      background-color: #F8F8F8;
+      border: 1px solid #DDD;
+      border-radius: 2px;
+      padding: 0 6px;
+      font-weight: 500;
+      white-space: pre-wrap;
+    }
+
+    .warning {
+      color: rgb(213, 0, 0);
+      background: #fbe9e7;
+      margin-bottom: 1.0em;
+      padding: 1.0em;
+    }
+
+    .warning a:visited {
+      color: rgb(213, 0, 0);
+    }
+
+    .warning a:link {
+      color: rgb(213, 0, 0);
+    }
+
+    .cta {
+      color: #3367D6;
+      display: inline-block;
+    }
+
+    .cta a {
+      color: white;
+      text-decoration: none;
+      background-color: rgb(14, 101, 241);
+      padding: 8px 12px;
+      margin-top: 8px;
+      min-height: 36px;
+      border-radius: 2px;
+      font-weight: 600;
+    }
+
+    .cta a:hover {
+      background-color: rgb(66, 133, 244, 0.9);
+    }
+
+    @media (max-width: 600px) {
+      .hero .logo {
+        float: initial;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .container {
+        margin-top: 0;
+      }
+
+      .hero {
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: black url('img/dark_bg.svg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        line-height: 2;
+        font-family: 'Comic Sans MS', 'Roboto', sans-serif;
+        color:white;
+        white-space: pre-wrap;
+      }
+      a {
+        color: #70A0FF;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <div class="hero">
+    <div style="text-align:-webkit-center;">
+      <picture>
+        <source srcset="img/KE-hello-world-dark.svg" media="(prefers-color-scheme: dark)">
+        <img th:src="@{img/KE-hello-world.svg}" alt="A group celebrating" width="427" height="231">
+      </picture>
+    </div>
+
+    <div class="message">
+      <h1 th:text="${message}" />
+    </div>
+  </div>
+
+
+</div>
+</body>
+</html>

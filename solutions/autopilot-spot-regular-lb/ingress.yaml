@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name:  app-spot-regular-ingress
+  annotations:
+    kubernetes.io/ingress.class:  "gce"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: app1-spot
+            port:
+              number: 80
+      - path: /bkup
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: app1-regular
+            port:
+              number: 80

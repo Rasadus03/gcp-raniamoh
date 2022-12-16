@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-regular
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app1-regular
+  template:
+    metadata:
+      labels:
+        app: app1-regular
+        myapp: app
+    spec:
+      nodeSelector:
+        cloud.google.com/compute-class: "Scale-Out"
+      containers:
+      - name: app1-regular
+        # Replace $LOCATION with your Artifact Registry location (e.g., us-west1).
+        # Replace $GCLOUD_PROJECT with your project ID.
+        # Replace $CONTAINER_REPO_NAME with your repository name hosting the built image.
+        # Replace $IMAGE_NAME with the name of the built image.
+        image: $LOCATION-docker.pkg.dev/$GCLOUD_PROJECT/$CONTAINER_REPO_NAME/$IMAGE_NAME:latest
+        # This app listens on port 8080 for web traffic by default.
+        ports:
+        - containerPort: 8080
+        env:
+          - name: PORT
+            value: "8080"
+          - name: APP_NAME
+            value: "Application Two- Non - Spot"
+---

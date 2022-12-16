@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-regular
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: ClusterIp
+  selector:
+    app: app1-regular
+  ports:
+  - name: http
+    port: 80 # Service's port
+    protocol: TCP
+    targetPort: 8080
+---
