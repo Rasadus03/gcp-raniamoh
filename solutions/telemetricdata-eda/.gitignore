@@ -1,0 +1,11 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+.idea
+arch
+gradle
+lib
+target
+
+# Ignore Gradle build output directory
+build
+telemetric-sa.json

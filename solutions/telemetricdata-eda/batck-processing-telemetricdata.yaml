@@ -1,0 +1,30 @@
+- init:
+    assign:
+    - project: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+    - topic: "eventarc-channel-us-central1-telemetry-channel-635"
+    - subscription: "batchprocessing-wf"
+    - batchMsgs: []
+- batch:
+    for:
+      value: index
+      range: [1, 10]
+      steps:
+      - pull_message:
+          call: googleapis.pubsub.v1.projects.subscriptions.pull
+          args:
+            subscription: ${"projects/" + project + "/subscriptions/" + subscription}
+            body:
+              maxMessages: 1
+          result: message
+      - update_batch_msg:
+          assign:
+          - batchMsgs: ${list.concat(batchMsgs, message)}
+- process_a_batch:
+    call: sys.log
+    args:
+      text: ${batchMsgs}
+      severity: ERROR
+- reset_batch_msg:
+    assign:
+    - batchMsgs: []
+    next: batch
