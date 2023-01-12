@@ -7,7 +7,8 @@ Here are the guidelines for implementing the solution in your GCP environment:
 
 1. Create EventArc custom channel  by running the following commands:
    - Enable all required APIs:
-``` gcloud services enable  \
+``` 
+    gcloud services enable  \
     eventarc.googleapis.com \
     eventarcpublishing.googleapis.com \
     workflows.googleapis.com
