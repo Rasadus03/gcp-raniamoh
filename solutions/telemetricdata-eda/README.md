@@ -52,7 +52,7 @@ copy the 'PUBSUB_TOPIC' and update the topic variable in batch-processing-teleme
 6. Create the "batch-processing-telemetricdata" workflow which log every 10 messages:
 - Create the worklow:
 ```
-   gcloud workflows deploy batck-processing-telemetricdata --source=batck-processing-telemetricdata.yaml \
+   gcloud workflows deploy batch-processing-telemetricdata --source=batch-processing-telemetricdata.yaml \
     --service-account=workflow-sa@PROJECT_ID.iam.gserviceaccount.com
 ```
 7. Create a new VM named "telemetry-edge" as e2 standard-2 with the  ***[vm-startup.sh](vm-startup.sh)*** as the startup script
