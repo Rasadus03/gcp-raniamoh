@@ -55,7 +55,7 @@ Here are the guidelines for implementing the solution in your GCP environment:
 ```
    mvn clean install
 ```
-10. Create SA used by the client and generate the SA secret (JSON File) and setup the Google app credentials pointing to the JSON file using the following commands"
+9. Create SA used by the client and generate the SA secret (JSON File) and setup the Google app credentials pointing to the JSON file using the following commands"
 ```
    #replace PROJECT_ID with the project id
    gcloud iam service-accounts create telemetrics-sa
@@ -66,8 +66,8 @@ Here are the guidelines for implementing the solution in your GCP environment:
        --iam-account=telemetrics-sa@PROJECT_ID.iam.gserviceaccount.com
    EXPORT GOOGLE_APPLICATION_CREDENTIALS='PATH_TO_THE_JSON_SECRET_FILE'
 ```
-13. Run the publish by running the following command
+10. Run the publish by running the following command
 ```
    mvn compile exec:java -Dexec.mainClass="com.baeldung.main.Exec"
 ```
-13. Now publish 10 messages and check both workflows to see the logged concatinated messages for the 10 batched messages 
+11. Now publish 10 messages and check both workflows to see the logged concatinated messages for the 10 batched messages 
