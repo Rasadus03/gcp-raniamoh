@@ -3,7 +3,7 @@
 ![solution high level blueprint](Telemetric-data-processing.png)
 Here are the guidelines for implementing the solution in your GCP environment:
 
-**Note: Please replace Project_ID **
+**Note: Please replace Project_ID**
 
 1. Create EventArc custom channel  by running the following commands:
    - Enable all required APIs:
