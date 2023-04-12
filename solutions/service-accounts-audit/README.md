@@ -1,6 +1,7 @@
 ### This is a Solution to audit service accounts activites and log it in the process for being fixed by an external soc
 #### The solution consists of the components shown in the following diagram:
 ![solution high level blueprint](SA_Insights.drawio.png)
+
 Here are the guidelines for implementing the solution in your GCP environment:
 
 **Note: Please replace Project_ID with your project id**
