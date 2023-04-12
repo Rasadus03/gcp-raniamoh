@@ -4,7 +4,7 @@
 
 Here are the guidelines for implementing the solution in your GCP environment:
 
-**Note: Please replace Project_ID with your project id**
+**Note: Please replace Project_ID with your project id and ORG_ID with organization id**
 
 1. The first workflow "sa-insight", loop on all the projects and inquire all the insights for all projects and create log notification. Create the "sa-insights" workflow using the following steps:
 - Create workflow service account:
