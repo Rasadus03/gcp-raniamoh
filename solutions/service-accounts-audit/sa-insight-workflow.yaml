@@ -1,0 +1,71 @@
+main:
+  steps:
+  - Init:
+      assign:
+      - projects:
+      - saInsights:
+      - returnInsights: []
+      - insightText:
+  - ReadProjects:
+      call: http.get
+      args:
+        url: https://cloudresourcemanager.googleapis.com/v3/projects
+        auth:
+          type: OAuth2
+          scopes: "https://www.googleapis.com/auth/cloud-platform"
+        headers:
+          Accept: "application/json"
+        query:
+          parent: "organizations/ORG_ID"
+      result: projects
+  - ProcessProjects:
+      for:
+        value: project
+        in: ${projects.body.projects}
+        steps:
+        - LoadProjectName:
+            assign:
+            - projectId: ${project.projectId}
+        - ReadInsights:
+            call: http.get
+            args:
+              url: ${"https://recommender.googleapis.com/v1/projects/"+projectId+"/locations/global/insightTypes/google.iam.serviceAccount.Insight/insights"}
+              auth:
+                type: OAuth2
+                scopes: "https://www.googleapis.com/auth/cloud-platform"
+              headers:
+                Accept: "application/json"
+            result: saInsights
+        - ProcessInsights:
+            try:
+              for:
+                value: insight
+                in: ${saInsights.body.insights}
+                steps:
+                - AssignVars:
+                    try:
+                      assign:
+                      - insightSubType: ${insight.insightSubtype}
+                      - email: ${insight.content.email}
+                      - tmp: ${text.split(insight.name,"/")}
+                      - insightId: ${tmp[len(tmp)-1]}
+                      - description: ${insight.description}
+                      - etag: ${insight.etag}
+                      - lastAuthTime: ${insight.content.lastAuthenticatedTime}
+                    except:
+                      as: e
+                      assign:
+                      - lastAuthTime: ""
+                - BuildInsightText:
+                    assign:
+                    - insightText: ${"For Project" +projectId+"Type of the error " + insightSubType + " Insights Id = " + insightId + " with etag =" +etag +" for Service account = " + email + " and lastAuthenticatedTime = " +  lastAuthTime + " with Description '"+ description +"'"}
+                    - returnInsights: ${list.concat(returnInsights, insightText)}
+                - LogInsight:
+                    call: sys.log
+                    args:
+                      text: ${insightText}
+                      severity: "WARNING"
+            except:
+              as: e
+  - return_value:
+      return: ${returnInsights}
