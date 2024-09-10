@@ -1,0 +1,17 @@
+flask
+requests
+emoji==2.12.1
+flask-cors
+grpcio
+grpcio-reflection
+grpcio-health-checking
+prometheus-flask-exporter
+py-grpc-prometheus
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-propagator-b3
+opentelemetry-propagator-gcp
+opentelemetry-exporter-gcp-trace
+opentelemetry-instrumentation-flask
+opentelemetry-instrumentation-requests
+six
