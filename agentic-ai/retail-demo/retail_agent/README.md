@@ -140,6 +140,6 @@ You can run it locally using adk web
     you can test it using the Retail Agent Cloud Run URL
 
 ### 13. Sample on how to test the Agent:
-    ![First Scenario](Demo-test1.png)
-    ![Second Scenario](Demo-test2.png)
-    ![Third Scenario](Demo-test3.png)
+![First Scenario](Demo-test1.png)
+![Second Scenario](Demo-test2.png)
+![Third Scenario](Demo-test3.png)
