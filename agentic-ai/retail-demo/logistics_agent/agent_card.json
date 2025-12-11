@@ -1,0 +1,89 @@
+{
+  "name": "LogisticsAgent",
+  "description": "Handles shipping rates, booking, and tracking.",
+  "url": "http://localhost:8001/",
+  "version": "1.0.0",
+  "default_input_modes": ["application/json"],
+  "default_output_modes": ["application/json"],
+  "capabilities": {
+    "streaming": false,
+    "push_notifications": false
+  },
+  "skills": [
+    {
+      "name": "get_shipping_rates",
+      "description": "Get shipping rates for a package.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "weight_kg": {"type": "number"},
+          "dimensions_cm": {
+            "type": "object",
+            "properties": {
+              "length": {"type": "number"},
+              "width": {"type": "number"},
+              "height": {"type": "number"}
+            },
+            "required": ["length", "width", "height"]
+          },
+          "origin_zip": {"type": "string"},
+          "dest_zip": {"type": "string"}
+        },
+        "required": ["weight_kg", "dimensions_cm", "origin_zip", "dest_zip"]
+      },
+      "output_schema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "carrier": {"type": "string"},
+            "service": {"type": "string"},
+            "rate": {"type": "number"},
+            "estimated_delivery": {"type": "string"}
+          }
+        }
+      }
+    },
+    {
+      "name": "book_shipment",
+      "description": "Book a shipment.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "rate_id": {"type": "string"},
+          "shipper_details": {"type": "object"},
+          "recipient_details": {"type": "object"}
+        },
+        "required": ["rate_id"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "tracking_number": {"type": "string"},
+          "label_url": {"type": "string"}
+        }
+      }
+    },
+    {
+      "name": "track_shipment",
+      "description": "Track an existing shipment.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "tracking_number": {"type": "string"}
+        },
+        "required": ["tracking_number"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string"},
+          "estimated_delivery": {"type": "string"},
+          "history": {"type": "array"}
+        }
+      }
+    }
+  ],
+  "security_schemes": {},
+  "security": []
+}

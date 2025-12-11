@@ -1,0 +1,73 @@
+sources:
+    my-cloud-sql-pg-source:
+        kind: cloud-sql-postgres
+        project: xxx
+        instance: xxx 
+        region: xxx
+        database: xxx
+        user: xxxx 
+        password: xxxx
+
+tools:
+  search_product_by_name:
+    kind: postgres-sql
+    source: my-cloud-sql-pg-source
+    description: Searches for a product by name or description in the catalog.
+    parameters:
+      - name: query
+        type: string
+        description: The name or description of the product.
+    statement: "SELECT product_id, name, category FROM products WHERE name ILIKE  '%' || $1 || '%' OR description ILIKE '%' || $1 || '%';"
+
+  check_product_inventory:
+    kind: postgres-sql
+    source: my-cloud-sql-pg-source
+    description: Checks the inventory level and locations for a given product_id.
+    parameters:
+      - name: product_id
+        type: string
+        description: The product id of a product.
+    statement:  |
+      SELECT location, stock_level
+      FROM inventory
+      WHERE product_id = $1;
+
+  get_related_products:
+    kind: postgres-sql
+    source: my-cloud-sql-pg-source
+    description: Gets related products from the same category.
+    parameters:
+      - name: product_id
+        type: string
+        description: The product id of a product.
+    statement: |
+      SELECT p2.product_id, p2.name
+      FROM products p1
+      JOIN products p2 ON p1.category = p2.category AND p1.product_id != p2.product_id
+      WHERE p1.product_id = $1
+      LIMIT 2;
+
+  get_order_status:
+    kind: postgres-sql
+    source: my-cloud-sql-pg-source
+    description: Retrieves the current status of a specific order.
+    parameters:
+      - name: order_id
+        type: integer
+        description: The ID of the order to check.
+    statement: "SELECT status FROM orders WHERE order_id = $1;"
+
+  list_user_orders:
+    kind: postgres-sql
+    source: my-cloud-sql-pg-source
+    description: Lists all orders placed by a specific user.
+    parameters:
+      - name: user_id
+        type: string
+        description: The ID of the user.
+    statement: "SELECT order_id, order_date, status FROM orders WHERE user_id = $1 ORDER BY order_date DESC;"
+
+toolsets:
+  retail_toolset:
+    - get_order_status
+    - list_user_orders

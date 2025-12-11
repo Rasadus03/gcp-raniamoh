@@ -1,0 +1,4 @@
+google-adk
+toolbox_core
+a2a-sdk
+a2a-sdk[http-server]
