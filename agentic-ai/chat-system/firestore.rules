@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions for authenticated access and RBAC
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isChannelMember(channelId) {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/channels/$(channelId)/members/$(request.auth.uid));
+    }
+
+    // Users collection: users can read profiles, but only update their own profile
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isOwner(userId);
+      allow delete: if false;
+    }
+
+    // Channels collection: readable by authenticated channel members
+    match /channels/{channelId} {
+      allow read: if isChannelMember(channelId);
+      allow create: if isAuthenticated();
+      allow update: if isChannelMember(channelId);
+      allow delete: if false;
+
+      // Channel members subcollection
+      match /members/{memberId} {
+        allow read: if isChannelMember(channelId);
+        allow create, update: if isChannelMember(channelId);
+        allow delete: if isOwner(memberId);
+      }
+
+      // Messages subcollection: only channel members can read or send messages as themselves
+      match /messages/{messageId} {
+        allow read: if isChannelMember(channelId);
+        allow create: if isChannelMember(channelId)
+                      && request.resource.data.senderId == request.auth.uid
+                      && request.resource.data.content is string
+                      && request.resource.data.content.size() > 0
+                      && request.resource.data.content.size() <= 4096;
+        allow update: if isChannelMember(channelId)
+                      && resource.data.senderId == request.auth.uid;
+        allow delete: if false;
+      }
+    }
+
+    // Default deny all other paths (Fail-Closed)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

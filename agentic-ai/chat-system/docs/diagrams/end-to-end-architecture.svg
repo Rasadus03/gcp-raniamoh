@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1320" width="100%" height="100%" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2B6CB0"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2F855A"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6B46C1"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#C05621"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#C53030"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#4A5568"/>
+    </marker>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="1320" fill="#F8FAFC" rx="12"/>
+
+  <!-- Title Banner -->
+  <rect x="20" y="16" width="960" height="54" rx="8" fill="#1A202C"/>
+  <text x="500" y="40" text-anchor="middle" fill="#FFFFFF" font-size="18" font-weight="700">Real-Time Multi-User Chat System — End-to-End Vertical Architecture</text>
+  <text x="500" y="59" text-anchor="middle" fill="#A0AEC0" font-size="12">1M Concurrent WebSockets | 10M+ DAU | 10k Write QPS | 50k Read QPS | &lt;200ms Global Latency | 99.99% SLA</text>
+
+  <!-- ================================================= -->
+  <!-- TIER 1: CLIENT TIER -->
+  <!-- ================================================= -->
+  <rect x="30" y="85" width="940" height="115" rx="10" fill="#EBF8FF" stroke="#3182CE" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="108" fill="#2B6CB0" font-size="13" font-weight="700">1. CLIENT TIER (Web &amp; Mobile Frontend — React SPA / iOS / Android)</text>
+
+  <rect x="90" y="122" width="320" height="62" rx="8" fill="#BEE3F8" stroke="#2B6CB0" stroke-width="1.5"/>
+  <text x="250" y="146" text-anchor="middle" fill="#1A365D" font-size="13" font-weight="700">Sender Client (Alice)</text>
+  <text x="250" y="164" text-anchor="middle" fill="#2C5282" font-size="11">WSS Stream + HTTPS REST (__Host- Cookie + CSRF)</text>
+
+  <rect x="590" y="122" width="320" height="62" rx="8" fill="#BEE3F8" stroke="#2B6CB0" stroke-width="1.5"/>
+  <text x="750" y="146" text-anchor="middle" fill="#1A365D" font-size="13" font-weight="700">Recipient Client (Bob)</text>
+  <text x="750" y="164" text-anchor="middle" fill="#2C5282" font-size="11">WSS Connected (Subscribed to Channel Events)</text>
+
+  <!-- ================================================= -->
+  <!-- TIER 2: EDGE & API GATEWAY TIER -->
+  <!-- ================================================= -->
+  <rect x="30" y="235" width="940" height="185" rx="10" fill="#F0FFF4" stroke="#38A169" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="258" fill="#276749" font-size="13" font-weight="700">2. EDGE, SECURITY &amp; API GATEWAY TIER (Multi-Region Anycast PoP)</text>
+
+  <rect x="180" y="272" width="640" height="52" rx="8" fill="#C6F6D5" stroke="#2F855A" stroke-width="1.5"/>
+  <text x="500" y="295" text-anchor="middle" fill="#22543D" font-size="13" font-weight="700">Google Cloud Armor (WAF / DDoS) + Global External Application Load Balancer</text>
+  <text x="500" y="313" text-anchor="middle" fill="#276749" font-size="11">Anycast IP | TLS 1.3 Termination | Geo-Routing to Nearest Regional Cluster</text>
+
+  <rect x="180" y="348" width="640" height="56" rx="8" fill="#C6F6D5" stroke="#2F855A" stroke-width="1.5"/>
+  <text x="500" y="371" text-anchor="middle" fill="#22543D" font-size="13" font-weight="700">API Gateway &amp; Backend-for-Frontend (Envoy / Cloud API Gateway)</text>
+  <text x="500" y="390" text-anchor="middle" fill="#276749" font-size="11">Rate Limiting | JWT Signature Verification | CSRF Check | HTTP/1.1 101 WS Upgrade</text>
+
+  <!-- ================================================= -->
+  <!-- TIER 3: STATEFUL WEBSOCKET GATEWAY TIER -->
+  <!-- ================================================= -->
+  <rect x="30" y="455" width="940" height="135" rx="10" fill="#FAF5FF" stroke="#805AD5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="478" fill="#553C9A" font-size="13" font-weight="700">3. STATEFUL WEBSOCKET MANAGER TIER (GKE Autopilot — ~250 Pods for 1M Concurrent Connections)</text>
+
+  <rect x="80" y="495" width="360" height="75" rx="8" fill="#E9D8FD" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="260" y="520" text-anchor="middle" fill="#44337A" font-size="13" font-weight="700">Chat Gateway Node A (Stateful WS Pod)</text>
+  <text x="260" y="538" text-anchor="middle" fill="#553C9A" font-size="11">Holds Sender's Active Socket (~4,500 conns/pod)</text>
+  <text x="260" y="555" text-anchor="middle" fill="#6B46C1" font-size="11" font-weight="600">StreamingPull Sub: sub-chat-node-A</text>
+
+  <rect x="560" y="495" width="360" height="75" rx="8" fill="#E9D8FD" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="740" y="520" text-anchor="middle" fill="#44337A" font-size="13" font-weight="700">Chat Gateway Node B (Stateful WS Pod)</text>
+  <text x="740" y="538" text-anchor="middle" fill="#553C9A" font-size="11">Holds Recipient's Active Socket (~4,500 conns/pod)</text>
+  <text x="740" y="555" text-anchor="middle" fill="#6B46C1" font-size="11" font-weight="600">StreamingPull Sub: sub-chat-node-B</text>
+
+  <!-- ================================================= -->
+  <!-- TIER 4: CORE STATELESS MICROSERVICES -->
+  <!-- ================================================= -->
+  <rect x="30" y="625" width="940" height="150" rx="10" fill="#FFFAF0" stroke="#DD6B20" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="648" fill="#9C4221" font-size="13" font-weight="700">4. CORE STATELESS MICROSERVICES TIER (Internal gRPC + mTLS Mesh)</text>
+
+  <!-- 5 Microservice Boxes -->
+  <rect x="45" y="665" width="168" height="90" rx="8" fill="#FEEBC8" stroke="#C05621" stroke-width="1.5"/>
+  <text x="129" y="688" text-anchor="middle" fill="#7B341E" font-size="12" font-weight="700">Auth &amp; Identity</text>
+  <text x="129" y="706" text-anchor="middle" fill="#9C4221" font-size="10">Argon2id Hashing</text>
+  <text x="129" y="721" text-anchor="middle" fill="#9C4221" font-size="10">KMS JWT &amp; WS Ticket</text>
+  <text x="129" y="736" text-anchor="middle" fill="#9C4221" font-size="10">Session Revocation</text>
+
+  <rect x="230" y="665" width="195" height="90" rx="8" fill="#FED7AA" stroke="#C05621" stroke-width="2"/>
+  <text x="327" y="688" text-anchor="middle" fill="#7B341E" font-size="12" font-weight="700">Message Service</text>
+  <text x="327" y="706" text-anchor="middle" fill="#9C4221" font-size="10">Idempotency Deduplication</text>
+  <text x="327" y="721" text-anchor="middle" fill="#9C4221" font-size="10">10k Write / 50k Read QPS</text>
+  <text x="327" y="736" text-anchor="middle" fill="#9C4221" font-size="10">Pub/Sub Node Router</text>
+
+  <rect x="442" y="665" width="175" height="90" rx="8" fill="#FEEBC8" stroke="#C05621" stroke-width="1.5"/>
+  <text x="529" y="688" text-anchor="middle" fill="#7B341E" font-size="12" font-weight="700">Channel &amp; Member</text>
+  <text x="529" y="706" text-anchor="middle" fill="#9C4221" font-size="10">1-on-1 DMs &amp; Group Rooms</text>
+  <text x="529" y="721" text-anchor="middle" fill="#9C4221" font-size="10">RBAC ACL Verification</text>
+  <text x="529" y="736" text-anchor="middle" fill="#9C4221" font-size="10">Roster Cache Sync</text>
+
+  <rect x="634" y="665" width="160" height="90" rx="8" fill="#FEEBC8" stroke="#C05621" stroke-width="1.5"/>
+  <text x="714" y="688" text-anchor="middle" fill="#7B341E" font-size="12" font-weight="700">Presence &amp; Typing</text>
+  <text x="714" y="706" text-anchor="middle" fill="#9C4221" font-size="10">30s Heartbeat Handler</text>
+  <text x="714" y="721" text-anchor="middle" fill="#9C4221" font-size="10">90s TTL Status Manager</text>
+  <text x="714" y="736" text-anchor="middle" fill="#9C4221" font-size="10">Typing Event Fan-Out</text>
+
+  <rect x="810" y="665" width="145" height="90" rx="8" fill="#FEEBC8" stroke="#C05621" stroke-width="1.5"/>
+  <text x="882" y="688" text-anchor="middle" fill="#7B341E" font-size="12" font-weight="700">Media Service</text>
+  <text x="882" y="706" text-anchor="middle" fill="#9C4221" font-size="10">Signed GCS Uploads</text>
+  <text x="882" y="721" text-anchor="middle" fill="#9C4221" font-size="10">Magic-Byte Validation</text>
+  <text x="882" y="736" text-anchor="middle" fill="#9C4221" font-size="10">Malware / CDR Scan</text>
+
+  <!-- ================================================= -->
+  <!-- TIER 5: EVENT STREAMING & ROUTING BUS -->
+  <!-- ================================================= -->
+  <rect x="30" y="810" width="940" height="135" rx="10" fill="#FFF5F5" stroke="#E53E3E" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="833" fill="#9B2C2C" font-size="13" font-weight="700">5. MESSAGE ROUTING &amp; EVENT BUS (Google Cloud Pub/Sub — Ordering Key: channel_id)</text>
+
+  <rect x="60" y="850" width="320" height="75" rx="8" fill="#FED7D7" stroke="#C53030" stroke-width="1.5"/>
+  <text x="220" y="874" text-anchor="middle" fill="#742A2A" font-size="12" font-weight="700">Per-Node Direct Routing Topics</text>
+  <text x="220" y="892" text-anchor="middle" fill="#9B2C2C" font-size="11">topics/chat-node-{pod_id}</text>
+  <text x="220" y="909" text-anchor="middle" fill="#9B2C2C" font-size="10">1-on-1 DMs &amp; Rooms &lt;500 Members</text>
+
+  <rect x="410" y="850" width="280" height="75" rx="8" fill="#FED7D7" stroke="#C53030" stroke-width="1.5"/>
+  <text x="550" y="874" text-anchor="middle" fill="#742A2A" font-size="12" font-weight="700">Sharded Channel Broadcast Topics</text>
+  <text x="550" y="892" text-anchor="middle" fill="#9B2C2C" font-size="11">topics/channel-broadcast-shard-{0..63}</text>
+  <text x="550" y="909" text-anchor="middle" fill="#9B2C2C" font-size="10">Large Rooms (&gt;=500 Members) &amp; Presence</text>
+
+  <rect x="720" y="850" width="230" height="75" rx="8" fill="#FED7D7" stroke="#C53030" stroke-width="1.5"/>
+  <text x="835" y="874" text-anchor="middle" fill="#742A2A" font-size="12" font-weight="700">Offline Push &amp; DLQ Topics</text>
+  <text x="835" y="892" text-anchor="middle" fill="#9B2C2C" font-size="11">topics/chat-offline-push &amp; dlq</text>
+  <text x="835" y="909" text-anchor="middle" fill="#9B2C2C" font-size="10">FCM / APNs / WebPush Workers</text>
+
+  <!-- ================================================= -->
+  <!-- TIER 6: PERSISTENCE & STORAGE LAYER -->
+  <!-- ================================================= -->
+  <rect x="30" y="980" width="940" height="145" rx="10" fill="#EDF2F7" stroke="#4A5568" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="50" y="1003" fill="#2D3748" font-size="13" font-weight="700">6. DISTRIBUTED PERSISTENCE &amp; EPHEMERAL CACHING LAYER (mTLS + Scoped IAM)</text>
+
+  <rect x="60" y="1020" width="295" height="88" rx="8" fill="#E2E8F0" stroke="#2D3748" stroke-width="1.5"/>
+  <text x="207" y="1043" text-anchor="middle" fill="#1A202C" font-size="12" font-weight="700">Cloud Spanner (Multi-Region 99.999%)</text>
+  <text x="207" y="1061" text-anchor="middle" fill="#2D3748" font-size="11">(or Firestore in Native Mode)</text>
+  <text x="207" y="1078" text-anchor="middle" fill="#4A5568" font-size="10">Users, Channels, Interleaved ChannelMembers</text>
+  <text x="207" y="1093" text-anchor="middle" fill="#4A5568" font-size="10">&amp; Messages (channel_id, sequence_num DESC)</text>
+
+  <rect x="385" y="1020" width="310" height="88" rx="8" fill="#E2E8F0" stroke="#2D3748" stroke-width="1.5"/>
+  <text x="540" y="1043" text-anchor="middle" fill="#1A202C" font-size="12" font-weight="700">Redis Cluster (Memorystore — 16+ Shards)</text>
+  <text x="540" y="1061" text-anchor="middle" fill="#2D3748" font-size="10">user:sessions:{id} -&gt; Gateway Node Routing</text>
+  <text x="540" y="1077" text-anchor="middle" fill="#2D3748" font-size="10">presence:{id} (90s TTL) &amp; typing:{chn} (5s TTL)</text>
+  <text x="540" y="1093" text-anchor="middle" fill="#2D3748" font-size="10">channel:members:{id} Cache &amp; ws:ticket:{hash}</text>
+
+  <rect x="725" y="1020" width="225" height="88" rx="8" fill="#E2E8F0" stroke="#2D3748" stroke-width="1.5"/>
+  <text x="837" y="1043" text-anchor="middle" fill="#1A202C" font-size="12" font-weight="700">Google Cloud Storage (GCS)</text>
+  <text x="837" y="1061" text-anchor="middle" fill="#2D3748" font-size="10">Isolated Bucket Outside Web Root</text>
+  <text x="837" y="1077" text-anchor="middle" fill="#2D3748" font-size="10">UUID Object Keys, Non-Executable</text>
+  <text x="837" y="1093" text-anchor="middle" fill="#2D3748" font-size="10">Content-Disposition: attachment</text>
+
+  <!-- ================================================= -->
+  <!-- NUMBERED ARROWS FOR END-TO-END MESSAGE FLOW -->
+  <!-- ================================================= -->
+  <!-- [1] Sender to Cloud Armor -->
+  <line x1="250" y1="184" x2="250" y2="268" stroke="#2B6CB0" stroke-width="2.2" marker-end="url(#arrow-blue)"/>
+  <rect x="135" y="203" width="210" height="22" rx="4" fill="#2B6CB0"/>
+  <text x="240" y="218" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">[1] WSS Frame: send_message</text>
+
+  <!-- [2] Cloud Armor to API Gateway -->
+  <line x1="350" y1="324" x2="350" y2="344" stroke="#2F855A" stroke-width="2.2" marker-end="url(#arrow-green)"/>
+  <rect x="215" y="325" width="125" height="18" rx="4" fill="#2F855A"/>
+  <text x="277" y="338" text-anchor="middle" fill="#FFFFFF" font-size="9.5" font-weight="700">[2] TLS &amp; WAF Pass</text>
+
+  <!-- [3] API Gateway to Chat Gateway Node A -->
+  <line x1="260" y1="404" x2="260" y2="491" stroke="#6B46C1" stroke-width="2.2" marker-end="url(#arrow-purple)"/>
+  <rect x="145" y="424" width="215" height="22" rx="4" fill="#6B46C1"/>
+  <text x="252" y="439" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">[3] Route Frame to Node A</text>
+
+  <!-- [4] Chat Gateway Node A to Message Service -->
+  <line x1="295" y1="570" x2="295" y2="661" stroke="#C05621" stroke-width="2.2" marker-end="url(#arrow-orange)"/>
+  <rect x="175" y="592" width="215" height="22" rx="4" fill="#C05621"/>
+  <text x="282" y="607" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">[4] gRPC SendMessage (mTLS)</text>
+
+  <!-- [5] Message Service to Channel Service -->
+  <line x1="425" y1="705" x2="438" y2="705" stroke="#C05621" stroke-width="2" marker-end="url(#arrow-orange)"/>
+  <rect x="392" y="642" width="110" height="20" rx="4" fill="#DD6B20"/>
+  <text x="447" y="656" text-anchor="middle" fill="#FFFFFF" font-size="9.5" font-weight="700">[5] Check ACL</text>
+
+  <!-- [6] Message Service to Cloud Spanner -->
+  <path d="M 275 755 L 275 795 L 42 795 L 42 1060 L 56 1060" fill="none" stroke="#2D3748" stroke-width="2.2" marker-end="url(#arrow-gray)"/>
+  <rect x="48" y="950" width="190" height="22" rx="4" fill="#2D3748"/>
+  <text x="143" y="965" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">[6] Persist to Spanner + ACK</text>
+
+  <!-- [7] Message Service to Redis Lookup -->
+  <path d="M 380 755 L 380 965 L 470 965 L 470 1016" fill="none" stroke="#2D3748" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow-gray)"/>
+  <rect x="385" y="952" width="195" height="22" rx="4" fill="#4A5568"/>
+  <text x="482" y="967" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">[7] Lookup Recipient Node (B)</text>
+
+  <!-- [8] Message Service to Pub/Sub Node Topic -->
+  <line x1="310" y1="755" x2="240" y2="846" stroke="#C53030" stroke-width="2.2" marker-end="url(#arrow-red)"/>
+  <rect x="145" y="782" width="215" height="22" rx="4" fill="#C53030"/>
+  <text x="252" y="797" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">[8] Publish to topic: chat-node-B</text>
+
+  <!-- [9] Pub/Sub Node Topic to Chat Gateway Node B -->
+  <path d="M 340 850 L 340 785 L 620 785 L 620 574" fill="none" stroke="#C53030" stroke-width="2.2" marker-end="url(#arrow-red)"/>
+  <rect x="520" y="774" width="225" height="22" rx="4" fill="#C53030"/>
+  <text x="632" y="789" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">[9] StreamingPull to Chat Node B</text>
+
+  <!-- [10] Chat Gateway Node B to Recipient Client -->
+  <path d="M 750 495 L 750 188" fill="none" stroke="#2B6CB0" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <rect x="640" y="424" width="235" height="22" rx="4" fill="#2B6CB0"/>
+  <text x="757" y="439" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">[10] WSS Push: receive_message (&lt;200ms)</text>
+
+  <!-- Legend / Flow Summary Footer -->
+  <rect x="30" y="1145" width="940" height="155" rx="10" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="1.5"/>
+  <text x="50" y="1170" fill="#1A202C" font-size="13" font-weight="700">End-to-End Message Delivery Sequence ([1] to [10]):</text>
+  <text x="50" y="1192" fill="#2D3748" font-size="11">• [1]-[3] Sender transmits send_message frame over WSS -&gt; Cloud Armor WAF &amp; Global LB -&gt; Stateful Chat Gateway Node A.</text>
+  <text x="50" y="1212" fill="#2D3748" font-size="11">• [4]-[6] Node A calls Message Service via mTLS gRPC -&gt; verifies ACL via Channel Service -&gt; commits interleaved row to Cloud Spanner &amp; returns message_ack.</text>
+  <text x="50" y="1232" fill="#2D3748" font-size="11">• [7]-[8] Message Service resolves recipient's connected gateway node (Node B) in Redis Cluster (user:sessions:{id}) &amp; publishes to Pub/Sub topic chat-node-B.</text>
+  <text x="50" y="1252" fill="#2D3748" font-size="11">• [9]-[10] Chat Gateway Node B receives the event via gRPC StreamingPull and pushes receive_message over Recipient's active WebSocket in &lt;200ms.</text>
+  <text x="50" y="1276" fill="#4A5568" font-size="11" font-style="italic">• Offline Fallback: If recipient has 0 active sessions in Redis, Message Service publishes to topics/chat-offline-push for FCM / APNs / WebPush delivery.</text>
+</svg>

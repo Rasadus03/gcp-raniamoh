@@ -1,0 +1,152 @@
+digraph RealTimeChatSystem {
+    rankdir=TB;
+    fontsize=12;
+    fontname="Helvetica";
+    compound=true;
+    nodesep=0.5;
+    ranksep=0.75;
+    splines=ortho;
+
+    node [
+        shape=box,
+        style="rounded,filled",
+        fontname="Helvetica",
+        fontsize=10,
+        margin="0.2,0.1"
+    ];
+    edge [
+        fontname="Helvetica",
+        fontsize=9,
+        color="#4A5568"
+    ];
+
+    // ==========================================
+    // 1. CLIENT TIER (FRONTEND)
+    // ==========================================
+    subgraph cluster_clients {
+        label="1. Client Tier (Web / Mobile Frontend)";
+        style="rounded,filled";
+        fillcolor="#EBF8FF";
+        color="#3182CE";
+
+        sender_client [label="Sender Client\n(SPA / Mobile App)\nWebSocket + HTTPS", fillcolor="#BEE3F8", color="#2B6CB0"];
+        recipient_client [label="Recipient Client\n(SPA / Mobile App)\nWebSocket + HTTPS", fillcolor="#BEE3F8", color="#2B6CB0"];
+    }
+
+    // ==========================================
+    // 2. EDGE & API GATEWAY TIER
+    // ==========================================
+    subgraph cluster_edge {
+        label="2. Edge, Security & API Gateway Tier (Multi-Region Anycast)";
+        style="rounded,filled";
+        fillcolor="#F0FFF4";
+        color="#38A169";
+
+        cloud_armor [label="Cloud Armor WAF & DDoS\n+ Global External App LB\n(TLS 1.3 Termination)", fillcolor="#C6F6D5", color="#2F855A"];
+        api_gateway [label="API Gateway / BFF Layer\n(Envoy / Cloud API Gateway)\nRate Limiting, JWT & CSRF Check", fillcolor="#C6F6D5", color="#2F855A"];
+    }
+
+    // ==========================================
+    // 3. STATEFUL WEBSOCKET GATEWAY TIER
+    // ==========================================
+    subgraph cluster_ws_tier {
+        label="3. Stateful WebSocket Manager Tier (GKE Autopilot - 1M Concurrent Conns)";
+        style="rounded,filled";
+        fillcolor="#FAF5FF";
+        color="#805AD5";
+
+        chat_gw_1 [label="Chat Gateway Node A\n(Stateful WS Manager)\nSub: chat-node-A", fillcolor="#E9D8FD", color="#6B46C1"];
+        chat_gw_2 [label="Chat Gateway Node B\n(Stateful WS Manager)\nSub: chat-node-B", fillcolor="#E9D8FD", color="#6B46C1"];
+    }
+
+    // ==========================================
+    // 4. CORE STATELESS MICROSERVICES TIER
+    // ==========================================
+    subgraph cluster_microservices {
+        label="4. Core Stateless Microservices Tier (gRPC + mTLS)";
+        style="rounded,filled";
+        fillcolor="#FFFAF0";
+        color="#DD6B20";
+
+        auth_svc [label="Auth & Identity Service\n(OAuth2/OIDC, Argon2id,\nJWT & WS Ticket Issuer)", fillcolor="#FEEBC8", color="#C05621"];
+        msg_svc [label="Message Ingestion &\nHistory Service\n(10k Write / 50k Read QPS)", fillcolor="#FEEBC8", color="#C05621"];
+        channel_svc [label="Channel & Membership\nService\n(DMs, Rooms, RBAC)", fillcolor="#FEEBC8", color="#C05621"];
+        presence_svc [label="Presence & Typing\nService\n(Heartbeat, Online/Typing)", fillcolor="#FEEBC8", color="#C05621"];
+        media_svc [label="Media & Attachment\nService\n(Signed URLs, Malware Scan)", fillcolor="#FEEBC8", color="#C05621"];
+    }
+
+    // ==========================================
+    // 5. EVENT STREAMING & ROUTING BUS
+    // ==========================================
+    subgraph cluster_pubsub {
+        label="5. Message Routing & Event Bus (Google Cloud Pub/Sub)";
+        style="rounded,filled";
+        fillcolor="#FFF5F5";
+        color="#E53E3E";
+
+        pubsub_node_topics [label="Per-Node Routing Topics\n(projects/*/topics/chat-node-{id})\nLow-Latency Unicast/Multicast", fillcolor="#FED7D7", color="#C53030"];
+        pubsub_channel_topics [label="Large Channel Broadcast Topics\n(projects/*/topics/channel-events-{shard})\n& Presence Fan-out Topics", fillcolor="#FED7D7", color="#C53030"];
+        pubsub_dlq [label="Dead Letter Topic (DLQ)\n& Offline Push Worker\n(FCM / APNs / WebPush)", fillcolor="#FED7D7", color="#C53030"];
+    }
+
+    // ==========================================
+    // 6. PERSISTENCE & EPHEMERAL STORAGE LAYER
+    // ==========================================
+    subgraph cluster_storage {
+        label="6. Distributed Storage & Caching Layer";
+        style="rounded,filled";
+        fillcolor="#EDF2F7";
+        color="#4A5568";
+
+        redis_cluster [label="Redis Cluster (Memorystore)\n- Session Routing (user -> node)\n- Ephemeral Presence & Typing TTL\n- Room Member Cache", shape=cylinder, fillcolor="#E2E8F0", color="#2D3748"];
+        spanner_db [label="Cloud Spanner (Multi-Region)\nor Firestore Native Mode\n- Users, Channels, Memberships\n- Interleaved Messages History", shape=cylinder, fillcolor="#E2E8F0", color="#2D3748"];
+        gcs_bucket [label="Cloud Storage (GCS)\nEncrypted Media Bucket\n(Outside Web Root)", shape=cylinder, fillcolor="#E2E8F0", color="#2D3748"];
+    }
+
+    // ==========================================
+    // MESSAGE & CONTROL FLOWS
+    // ==========================================
+
+    // Edge Ingress
+    sender_client -> cloud_armor [label="[1] WSS Frame (send_message)\n/ HTTPS REST", color="#2B6CB0", penwidth=1.8];
+    recipient_client -> cloud_armor [label="WSS Connected", dir=both, style=dashed];
+    cloud_armor -> api_gateway [label="[2] TLS Terminated\nWAF Verified", color="#2F855A", penwidth=1.8];
+
+    // REST Auth & History Routing
+    api_gateway -> auth_svc [label="REST /v1/auth/*"];
+    api_gateway -> channel_svc [label="REST /v1/channels/*"];
+    api_gateway -> msg_svc [label="REST GET /v1/channels/{id}/messages"];
+    api_gateway -> media_svc [label="REST /v1/media/*"];
+
+    // WebSocket Upgrade & Message Flow
+    api_gateway -> chat_gw_1 [label="[3] Route WSS Frame\nto Connected Node A", color="#6B46C1", penwidth=1.8];
+    api_gateway -> chat_gw_2 [label="WSS Connection\n(Recipient on Node B)", style=dashed];
+
+    // Chat Gateway to Core Services
+    chat_gw_1 -> msg_svc [label="[4] gRPC SendMessage\n(mTLS + Idempotency Key)", color="#C05621", penwidth=1.8];
+    chat_gw_1 -> presence_svc [label="gRPC Heartbeat /\nTyping Event"];
+
+    // Message Service Processing
+    msg_svc -> channel_svc [label="[5] Verify ACL &\nGet Channel Members"];
+    channel_svc -> redis_cluster [label="Read/Cache\nRoom Roster"];
+    msg_svc -> spanner_db [label="[6] Persist Message\n(Interleaved Write)", color="#2D3748", penwidth=1.8];
+    msg_svc -> redis_cluster [label="[7] Lookup Recipient\nGateway Node (Node B)", color="#2D3748", penwidth=1.8];
+
+    // Pub/Sub Routing
+    msg_svc -> pubsub_node_topics [label="[8] Publish DeliveryEnvelope\nto topic: chat-node-B", color="#C53030", penwidth=1.8];
+    msg_svc -> pubsub_channel_topics [label="Publish Large Room\nBroadcast"];
+    pubsub_node_topics -> chat_gw_2 [label="[9] Push/StreamingPull\nto Chat Gateway Node B", color="#C53030", penwidth=1.8];
+    pubsub_channel_topics -> chat_gw_2 [label="Fan-out Delivery"];
+    pubsub_node_topics -> pubsub_dlq [label="Undeliverable /\nOffline User", style=dotted];
+
+    // Final Delivery to Recipient
+    chat_gw_2 -> recipient_client [label="[10] WSS Push (receive_message)\n< 200ms End-to-End", color="#2B6CB0", penwidth=2.0];
+
+    // Presence & Media Storage Connections
+    presence_svc -> redis_cluster [label="SETEX Presence TTL\n& Routing Table"];
+    presence_svc -> pubsub_channel_topics [label="Publish Presence Diff"];
+    channel_svc -> spanner_db [label="Read/Write\nChannels & Members"];
+    auth_svc -> spanner_db [label="Read/Write\nUser Credentials"];
+    auth_svc -> redis_cluster [label="Store WS Ticket &\nRevocation List"];
+    media_svc -> gcs_bucket [label="Signed Upload /\nMalware Sandbox"];
+}

@@ -1,0 +1,22 @@
+# Dependencies & Build Outputs
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Environment & Secret Files (Never Commit Credentials)
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.crt
+*service-account*.json
+*credentials*.json
+
+# OS & Editor Artifacts
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*

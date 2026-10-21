@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 840" width="100%" height="100%" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="seq-solid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2B6CB0"/>
+    </marker>
+    <marker id="seq-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2F855A"/>
+    </marker>
+    <marker id="seq-pubsub" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#C53030"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="840" fill="#F8FAFC" rx="12"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="960" height="46" rx="8" fill="#1A202C"/>
+  <text x="500" y="44" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">Task 5: Connection Lifecycle — Auth, Single-Use WS Ticket, Handshake &amp; Presence</text>
+
+  <!-- Participant Boxes -->
+  <g font-size="11" font-weight="700" text-anchor="middle">
+    <rect x="35" y="75" width="110" height="44" rx="6" fill="#BEE3F8" stroke="#2B6CB0" stroke-width="1.5"/>
+    <text x="90" y="96" fill="#1A365D">Client</text>
+    <text x="90" y="111" fill="#2C5282" font-size="9.5">(Web / Mobile)</text>
+
+    <rect x="185" y="75" width="120" height="44" rx="6" fill="#C6F6D5" stroke="#2F855A" stroke-width="1.5"/>
+    <text x="245" y="96" fill="#22543D">Global LB &amp;</text>
+    <text x="245" y="111" fill="#276749" font-size="9.5">API Gateway</text>
+
+    <rect x="345" y="75" width="120" height="44" rx="6" fill="#FEEBC8" stroke="#C05621" stroke-width="1.5"/>
+    <text x="405" y="96" fill="#7B341E">Auth Service</text>
+    <text x="405" y="111" fill="#9C4221" font-size="9.5">(Argon2 + KMS)</text>
+
+    <rect x="505" y="75" width="125" height="44" rx="6" fill="#E9D8FD" stroke="#6B46C1" stroke-width="1.5"/>
+    <text x="567" y="96" fill="#44337A">Chat Gateway</text>
+    <text x="567" y="111" fill="#553C9A" font-size="9.5">(Node A)</text>
+
+    <rect x="665" y="75" width="120" height="44" rx="6" fill="#FEEBC8" stroke="#C05621" stroke-width="1.5"/>
+    <text x="725" y="96" fill="#7B341E">Presence</text>
+    <text x="725" y="111" fill="#9C4221" font-size="9.5">Service</text>
+
+    <rect x="820" y="75" width="145" height="44" rx="6" fill="#E2E8F0" stroke="#2D3748" stroke-width="1.5"/>
+    <text x="892" y="96" fill="#1A202C">Redis Cluster</text>
+    <text x="892" y="111" fill="#4A5568" font-size="9.5">&amp; Cloud Pub/Sub</text>
+  </g>
+
+  <!-- Lifelines -->
+  <g stroke="#CBD5E0" stroke-width="1.5" stroke-dasharray="5,5">
+    <line x1="90" y1="119" x2="90" y2="815"/>
+    <line x1="245" y1="119" x2="245" y2="815"/>
+    <line x1="405" y1="119" x2="405" y2="815"/>
+    <line x1="567" y1="119" x2="567" y2="815"/>
+    <line x1="725" y1="119" x2="725" y2="815"/>
+    <line x1="892" y1="119" x2="892" y2="815"/>
+  </g>
+
+  <!-- PHASE 1 BANNER -->
+  <rect x="35" y="132" width="930" height="24" rx="4" fill="#EDF2F7" stroke="#A0AEC0"/>
+  <text x="500" y="148" text-anchor="middle" fill="#2D3748" font-size="11" font-weight="700">PHASE 1: User Authentication &amp; Single-Use WebSocket Ticket Acquisition</text>
+
+  <!-- Step 1 -->
+  <line x1="90" y1="175" x2="400" y2="175" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="245" y="169" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">1. POST /v1/auth/login (email, password)</text>
+
+  <!-- Step 2 -->
+  <line x1="405" y1="205" x2="95" y2="205" stroke="#2F855A" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#seq-return)"/>
+  <text x="250" y="199" text-anchor="middle" fill="#22543D" font-size="10" font-weight="600">2. 200 OK + Set-Cookie: __Host-chat_session (HttpOnly, Secure) + csrf_token</text>
+
+  <!-- Step 3 -->
+  <line x1="90" y1="235" x2="400" y2="235" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="245" y="229" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">3. POST /v1/auth/ws-ticket (Cookie + X-CSRF-Token)</text>
+
+  <!-- Step 4 -->
+  <line x1="405" y1="262" x2="887" y2="262" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="646" y="256" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">4. SET ws:ticket:{sha256} {user_id, session_id} EX 30s</text>
+
+  <!-- Step 5 -->
+  <line x1="405" y1="290" x2="95" y2="290" stroke="#2F855A" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#seq-return)"/>
+  <text x="250" y="284" text-anchor="middle" fill="#22543D" font-size="10" font-weight="600">5. 201 Created {ws_ticket, ws_endpoint}</text>
+
+  <!-- PHASE 2 BANNER -->
+  <rect x="35" y="310" width="930" height="24" rx="4" fill="#EDF2F7" stroke="#A0AEC0"/>
+  <text x="500" y="326" text-anchor="middle" fill="#2D3748" font-size="11" font-weight="700">PHASE 2: WebSocket Upgrade Handshake &amp; Atomic Ticket Redemption</text>
+
+  <!-- Step 6 -->
+  <line x1="90" y1="355" x2="562" y2="355" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="326" y="349" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">6. GET wss://ws.chat.example.com/v1/stream (Sec-WebSocket-Protocol: ticket)</text>
+
+  <!-- Step 7 -->
+  <line x1="567" y1="383" x2="410" y2="383" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="488" y="377" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">7. gRPC RedeemWsTicket(ws_ticket)</text>
+
+  <!-- Step 8 -->
+  <line x1="405" y1="410" x2="887" y2="410" stroke="#C53030" stroke-width="1.8" marker-end="url(#seq-pubsub)"/>
+  <text x="646" y="404" text-anchor="middle" fill="#9B2C2C" font-size="10" font-weight="600">8. Atomic GETDEL ws:ticket:{sha256} (Single-Use Replay Prevention)</text>
+
+  <!-- Step 9 -->
+  <line x1="567" y1="440" x2="95" y2="440" stroke="#2F855A" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#seq-return)"/>
+  <text x="331" y="434" text-anchor="middle" fill="#22543D" font-size="10" font-weight="700">9. HTTP/1.1 101 Switching Protocols (WSS Connection Established)</text>
+
+  <!-- PHASE 3 BANNER -->
+  <rect x="35" y="460" width="930" height="24" rx="4" fill="#EDF2F7" stroke="#A0AEC0"/>
+  <text x="500" y="476" text-anchor="middle" fill="#2D3748" font-size="11" font-weight="700">PHASE 3: Session Routing Registration, Presence Fan-Out &amp; 30s Heartbeat Loop</text>
+
+  <!-- Step 10 -->
+  <line x1="567" y1="505" x2="720" y2="505" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="646" y="499" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">10. gRPC RegisterConnection(Node A)</text>
+
+  <!-- Step 11 -->
+  <line x1="725" y1="533" x2="887" y2="533" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="806" y="527" text-anchor="middle" fill="#1A365D" font-size="9.5" font-weight="600">11. HSET user:sessions &amp; presence=ONLINE (90s TTL)</text>
+
+  <!-- Step 12 -->
+  <line x1="892" y1="562" x2="572" y2="562" stroke="#C53030" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#seq-pubsub)"/>
+  <text x="732" y="556" text-anchor="middle" fill="#9B2C2C" font-size="10" font-weight="600">12. Pub/Sub Broadcast: presence_update (status = ONLINE)</text>
+
+  <!-- Loop Box -->
+  <rect x="55" y="582" width="900" height="90" rx="6" fill="#EBF8FF" fill-opacity="0.5" stroke="#3182CE" stroke-width="1.2"/>
+  <rect x="55" y="582" width="145" height="20" rx="3" fill="#3182CE"/>
+  <text x="127" y="596" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700">LOOP: Every 30 Seconds</text>
+
+  <line x1="90" y1="618" x2="562" y2="618" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="326" y="612" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">13. WSS Frame: heartbeat_ping</text>
+
+  <line x1="567" y1="636" x2="887" y2="636" stroke="#2B6CB0" stroke-width="1.5" marker-end="url(#seq-solid)"/>
+  <text x="727" y="630" text-anchor="middle" fill="#1A365D" font-size="10">14. Refresh EXPIRE 90s on user:sessions:{uid} &amp; presence:{uid}</text>
+
+  <line x1="567" y1="656" x2="95" y2="656" stroke="#2F855A" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#seq-return)"/>
+  <text x="326" y="650" text-anchor="middle" fill="#22543D" font-size="10" font-weight="600">15. WSS Frame: heartbeat_pong</text>
+
+  <!-- PHASE 4 BANNER -->
+  <rect x="35" y="688" width="930" height="24" rx="4" fill="#EDF2F7" stroke="#A0AEC0"/>
+  <text x="500" y="704" text-anchor="middle" fill="#2D3748" font-size="11" font-weight="700">PHASE 4: Graceful Disconnect or 90s TTL Timeout Cleanup</text>
+
+  <!-- Step 16 -->
+  <line x1="90" y1="736" x2="562" y2="736" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="326" y="730" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">16. WSS Close Frame (1000 Normal Closure) or 60s Read Timeout</text>
+
+  <!-- Step 17 -->
+  <line x1="567" y1="765" x2="887" y2="765" stroke="#2B6CB0" stroke-width="1.8" marker-end="url(#seq-solid)"/>
+  <text x="727" y="759" text-anchor="middle" fill="#1A365D" font-size="10" font-weight="600">17. HDEL user:sessions:{uid} {session_id} -&gt; If HLEN == 0, set OFFLINE</text>
+
+  <!-- Step 18 -->
+  <line x1="892" y1="795" x2="572" y2="795" stroke="#C53030" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#seq-pubsub)"/>
+  <text x="732" y="789" text-anchor="middle" fill="#9B2C2C" font-size="10" font-weight="600">18. Pub/Sub Broadcast: presence_update (status = OFFLINE)</text>
+</svg>

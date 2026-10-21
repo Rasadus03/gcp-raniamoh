@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 660" width="100%" height="100%" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="fe-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2B6CB0"/>
+    </marker>
+    <marker id="fe-state" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6B46C1"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="660" fill="#F8FAFC" rx="12"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="920" height="46" rx="8" fill="#1A202C"/>
+  <text x="480" y="44" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">Frontend Modular Architecture &amp; WebSocket Client Resilience State Machine</text>
+
+  <!-- TOP SECTION: 3-LAYER FRONTEND ARCHITECTURE -->
+  <rect x="30" y="78" width="900" height="330" rx="10" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="1.5"/>
+  <text x="50" y="102" fill="#1A202C" font-size="13" font-weight="700">A. Clean Modular / Micro-Frontend Architecture (React 19 + TypeScript + Strict CSP)</text>
+
+  <!-- Presentation Layer -->
+  <rect x="50" y="115" width="860" height="82" rx="8" fill="#EBF8FF" stroke="#3182CE" stroke-width="1.5"/>
+  <text x="68" y="135" fill="#2B6CB0" font-size="11" font-weight="700">1. PRESENTATION LAYER (JSX Auto-Escaped | Zero innerHTML | Custom Accessible Modals)</text>
+
+  <rect x="68" y="145" width="155" height="42" rx="6" fill="#BEE3F8" stroke="#2B6CB0"/>
+  <text x="145" y="164" text-anchor="middle" fill="#1A365D" font-size="11" font-weight="700">@chat/app-shell</text>
+  <text x="145" y="179" text-anchor="middle" fill="#2C5282" font-size="9.5">Auth Guard &amp; Layout</text>
+
+  <rect x="235" y="145" width="160" height="42" rx="6" fill="#BEE3F8" stroke="#2B6CB0"/>
+  <text x="315" y="164" text-anchor="middle" fill="#1A365D" font-size="11" font-weight="700">@chat/channel-roster</text>
+  <text x="315" y="179" text-anchor="middle" fill="#2C5282" font-size="9.5">DMs, Rooms &amp; Badges</text>
+
+  <rect x="407" y="145" width="180" height="42" rx="6" fill="#BEE3F8" stroke="#2B6CB0"/>
+  <text x="497" y="164" text-anchor="middle" fill="#1A365D" font-size="11" font-weight="700">@chat/messaging-core</text>
+  <text x="497" y="179" text-anchor="middle" fill="#2C5282" font-size="9.5">60fps Virtualized List</text>
+
+  <rect x="599" y="145" width="145" height="42" rx="6" fill="#BEE3F8" stroke="#2B6CB0"/>
+  <text x="671" y="164" text-anchor="middle" fill="#1A365D" font-size="11" font-weight="700">@chat/presence</text>
+  <text x="671" y="179" text-anchor="middle" fill="#2C5282" font-size="9.5">Status &amp; Typing Dots</text>
+
+  <rect x="756" y="145" width="138" height="42" rx="6" fill="#BEE3F8" stroke="#2B6CB0"/>
+  <text x="825" y="164" text-anchor="middle" fill="#1A365D" font-size="11" font-weight="700">@chat/media-ui</text>
+  <text x="825" y="179" text-anchor="middle" fill="#2C5282" font-size="9.5">Safe Upload Picker</text>
+
+  <!-- State Layer -->
+  <rect x="50" y="212" width="860" height="82" rx="8" fill="#FAF5FF" stroke="#805AD5" stroke-width="1.5"/>
+  <text x="68" y="232" fill="#553C9A" font-size="11" font-weight="700">2. STATE MANAGEMENT &amp; OPTIMISTIC RECONCILIATION LAYER (In-Memory Only — Zero localStorage Tokens)</text>
+
+  <rect x="68" y="242" width="265" height="42" rx="6" fill="#E9D8FD" stroke="#6B46C1"/>
+  <text x="200" y="261" text-anchor="middle" fill="#44337A" font-size="11" font-weight="700">Normalized Entity Store (Zustand)</text>
+  <text x="200" y="276" text-anchor="middle" fill="#553C9A" font-size="9.5">channelsById | messagesById | presenceByUserId</text>
+
+  <rect x="350" y="242" width="275" height="42" rx="6" fill="#E9D8FD" stroke="#6B46C1"/>
+  <text x="487" y="261" text-anchor="middle" fill="#44337A" font-size="11" font-weight="700">Optimistic UI Outbox Reconciler</text>
+  <text x="487" y="276" text-anchor="middle" fill="#553C9A" font-size="9.5">Reconciles client_message_id -&gt; message_id</text>
+
+  <rect x="642" y="242" width="252" height="42" rx="6" fill="#E9D8FD" stroke="#6B46C1"/>
+  <text x="768" y="261" text-anchor="middle" fill="#44337A" font-size="11" font-weight="700">History &amp; Delta Sync (TanStack Query)</text>
+  <text x="768" y="276" text-anchor="middle" fill="#553C9A" font-size="9.5">Cursor Pagination &amp; Sequence Gap Fill</text>
+
+  <!-- Infrastructure & Security Layer -->
+  <rect x="50" y="309" width="860" height="82" rx="8" fill="#F0FFF4" stroke="#38A169" stroke-width="1.5"/>
+  <text x="68" y="329" fill="#276749" font-size="11" font-weight="700">3. REAL-TIME TRANSPORT &amp; SECURITY LAYER</text>
+
+  <rect x="68" y="339" width="265" height="42" rx="6" fill="#C6F6D5" stroke="#2F855A"/>
+  <text x="200" y="358" text-anchor="middle" fill="#22543D" font-size="11" font-weight="700">WebSocket Client Engine</text>
+  <text x="200" y="373" text-anchor="middle" fill="#276749" font-size="9.5">Single-Use Ticket | 30s Ping/Pong | Jitter Backoff</text>
+
+  <rect x="350" y="339" width="275" height="42" rx="6" fill="#C6F6D5" stroke="#2F855A"/>
+  <text x="487" y="358" text-anchor="middle" fill="#22543D" font-size="11" font-weight="700">Hardened BFF HTTPS Client</text>
+  <text x="487" y="373" text-anchor="middle" fill="#276749" font-size="9.5">__Host-chat_session Cookie + X-CSRF-Token</text>
+
+  <rect x="642" y="339" width="252" height="42" rx="6" fill="#C6F6D5" stroke="#2F855A"/>
+  <text x="768" y="358" text-anchor="middle" fill="#22543D" font-size="11" font-weight="700">Security &amp; Sanitization Guards</text>
+  <text x="768" y="373" text-anchor="middle" fill="#276749" font-size="9.5">DOMPurify | PII Masking | Full Logout Purge</text>
+
+  <!-- BOTTOM SECTION: WEBSOCKET CLIENT STATE MACHINE -->
+  <rect x="30" y="425" width="900" height="215" rx="10" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="1.5"/>
+  <text x="50" y="450" fill="#1A202C" font-size="13" font-weight="700">B. WebSocket Client Engine — Connection &amp; Recovery State Machine</text>
+
+  <!-- State Nodes -->
+  <rect x="55" y="490" width="130" height="55" rx="25" fill="#EDF2F7" stroke="#4A5568" stroke-width="1.5"/>
+  <text x="120" y="515" text-anchor="middle" fill="#1A202C" font-size="11" font-weight="700">DISCONNECTED</text>
+  <text x="120" y="531" text-anchor="middle" fill="#4A5568" font-size="9.5">Initial / Logged Out</text>
+
+  <rect x="235" y="490" width="150" height="55" rx="8" fill="#FEEBC8" stroke="#C05621" stroke-width="1.5"/>
+  <text x="310" y="515" text-anchor="middle" fill="#7B341E" font-size="11" font-weight="700">ACQUIRING_TICKET</text>
+  <text x="310" y="531" text-anchor="middle" fill="#9C4221" font-size="9.5">POST /v1/auth/ws-ticket</text>
+
+  <rect x="435" y="490" width="145" height="55" rx="8" fill="#BEE3F8" stroke="#2B6CB0" stroke-width="1.5"/>
+  <text x="507" y="515" text-anchor="middle" fill="#1A365D" font-size="11" font-weight="700">CONNECTING_WSS</text>
+  <text x="507" y="531" text-anchor="middle" fill="#2C5282" font-size="9.5">101 Upgrade Handshake</text>
+
+  <rect x="630" y="490" width="130" height="55" rx="8" fill="#E9D8FD" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="695" y="515" text-anchor="middle" fill="#44337A" font-size="11" font-weight="700">DELTA_SYNCING</text>
+  <text x="695" y="531" text-anchor="middle" fill="#553C9A" font-size="9.5">Backfill Missed Seq</text>
+
+  <rect x="800" y="490" width="115" height="55" rx="25" fill="#C6F6D5" stroke="#2F855A" stroke-width="2"/>
+  <text x="857" y="515" text-anchor="middle" fill="#22543D" font-size="11" font-weight="700">SYNCED_READY</text>
+  <text x="857" y="531" text-anchor="middle" fill="#276749" font-size="9.5">30s Ping/Pong</text>
+
+  <rect x="410" y="575" width="310" height="48" rx="8" fill="#FED7D7" stroke="#C53030" stroke-width="1.5"/>
+  <text x="565" y="596" text-anchor="middle" fill="#742A2A" font-size="11" font-weight="700">RECONNECT_BACKOFF (Full Jitter)</text>
+  <text x="565" y="613" text-anchor="middle" fill="#9B2C2C" font-size="9.5">delay = random(0, min(30s, 500ms * 2^attempt))</text>
+
+  <!-- State Transitions -->
+  <line x1="185" y1="517" x2="231" y2="517" stroke="#6B46C1" stroke-width="1.8" marker-end="url(#fe-state)"/>
+  <line x1="385" y1="517" x2="431" y2="517" stroke="#6B46C1" stroke-width="1.8" marker-end="url(#fe-state)"/>
+  <line x1="580" y1="517" x2="626" y2="517" stroke="#6B46C1" stroke-width="1.8" marker-end="url(#fe-state)"/>
+  <line x1="760" y1="517" x2="796" y2="517" stroke="#6B46C1" stroke-width="1.8" marker-end="url(#fe-state)"/>
+
+  <!-- Reconnect Loops -->
+  <path d="M 857 545 L 857 599 L 724 599" fill="none" stroke="#C53030" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#fe-state)"/>
+  <text x="805" y="592" text-anchor="middle" fill="#C53030" font-size="9.5" font-weight="600">Pong Timeout / Close</text>
+
+  <path d="M 410 599 L 310 599 L 310 549" fill="none" stroke="#C05621" stroke-width="1.6" marker-end="url(#fe-state)"/>
+  <text x="348" y="590" text-anchor="middle" fill="#C05621" font-size="9.5" font-weight="600">Timer Fired (New Ticket)</text>
+</svg>

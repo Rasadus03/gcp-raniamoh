@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="100%" height="100%" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#C53030"/>
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6B46C1"/>
+    </marker>
+    <marker id="arr-dark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2D3748"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="620" fill="#F8FAFC" rx="12"/>
+
+  <!-- Header -->
+  <rect x="20" y="16" width="920" height="48" rx="8" fill="#1A202C"/>
+  <text x="480" y="45" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">Task 3: Two-Tier Hybrid Google Cloud Pub/Sub Message Routing Topology</text>
+
+  <!-- Left Column: Producer (Message Service + Redis) -->
+  <rect x="30" y="85" width="240" height="505" rx="10" fill="#FFFAF0" stroke="#DD6B20" stroke-width="1.5"/>
+  <text x="150" y="112" text-anchor="middle" fill="#9C4221" font-size="13" font-weight="700">1. Routing Resolution</text>
+
+  <rect x="50" y="135" width="200" height="90" rx="8" fill="#FEEBC8" stroke="#C05621" stroke-width="1.5"/>
+  <text x="150" y="162" text-anchor="middle" fill="#7B341E" font-size="13" font-weight="700">Message Service</text>
+  <text x="150" y="182" text-anchor="middle" fill="#9C4221" font-size="11">Evaluates Channel Size</text>
+  <text x="150" y="200" text-anchor="middle" fill="#9C4221" font-size="10">ordering_key = channel_id</text>
+
+  <rect x="50" y="275" width="200" height="110" rx="8" fill="#E2E8F0" stroke="#2D3748" stroke-width="1.5"/>
+  <text x="150" y="302" text-anchor="middle" fill="#1A202C" font-size="12" font-weight="700">Redis Cluster Lookup</text>
+  <text x="150" y="322" text-anchor="middle" fill="#2D3748" font-size="10">SMEMBERS channel:members:{id}</text>
+  <text x="150" y="340" text-anchor="middle" fill="#2D3748" font-size="10">HGETALL user:sessions:{uid}</text>
+  <text x="150" y="358" text-anchor="middle" fill="#4A5568" font-size="10">Maps uid -&gt; chat-node-{N}</text>
+
+  <line x1="150" y1="225" x2="150" y2="271" stroke="#2D3748" stroke-width="2" marker-end="url(#arr-dark)"/>
+
+  <rect x="50" y="425" width="200" height="135" rx="8" fill="#EDF2F7" stroke="#718096" stroke-width="1"/>
+  <text x="150" y="448" text-anchor="middle" fill="#2D3748" font-size="11" font-weight="700">Routing Decision Rule:</text>
+  <text x="65" y="472" fill="#2D3748" font-size="10">• Direct DM / Group &lt; 500:</text>
+  <text x="75" y="488" fill="#C53030" font-size="10" font-weight="600">Tier 1 Per-Node Topics</text>
+  <text x="65" y="514" fill="#2D3748" font-size="10">• Large Group &gt;= 500:</text>
+  <text x="75" y="530" fill="#6B46C1" font-size="10" font-weight="600">Tier 2 Sharded Broadcast</text>
+
+  <!-- Middle Column: Cloud Pub/Sub Topics -->
+  <rect x="310" y="85" width="320" height="505" rx="10" fill="#FFF5F5" stroke="#E53E3E" stroke-width="1.5"/>
+  <text x="470" y="112" text-anchor="middle" fill="#9B2C2C" font-size="13" font-weight="700">2. Google Cloud Pub/Sub Topics</text>
+
+  <!-- Tier 1 Topics -->
+  <rect x="330" y="130" width="280" height="185" rx="8" fill="#FED7D7" stroke="#C53030" stroke-width="1.5"/>
+  <text x="470" y="152" text-anchor="middle" fill="#742A2A" font-size="12" font-weight="700">Tier 1: Per-Node Unicast/Multicast</text>
+  <rect x="350" y="166" width="240" height="36" rx="6" fill="#FFFFFF" stroke="#C53030"/>
+  <text x="470" y="189" text-anchor="middle" fill="#742A2A" font-size="11" font-weight="600">topic: chat-node-001</text>
+  <rect x="350" y="212" width="240" height="36" rx="6" fill="#FFFFFF" stroke="#C53030"/>
+  <text x="470" y="235" text-anchor="middle" fill="#742A2A" font-size="11" font-weight="600">topic: chat-node-002</text>
+  <rect x="350" y="258" width="240" height="36" rx="6" fill="#FFFFFF" stroke="#C53030"/>
+  <text x="470" y="281" text-anchor="middle" fill="#742A2A" font-size="11" font-weight="600">topic: chat-node-250</text>
+
+  <!-- Tier 2 Topics -->
+  <rect x="330" y="335" width="280" height="120" rx="8" fill="#E9D8FD" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="470" y="357" text-anchor="middle" fill="#44337A" font-size="12" font-weight="700">Tier 2: Sharded Channel Broadcast</text>
+  <text x="470" y="374" text-anchor="middle" fill="#553C9A" font-size="10">Shard = CRC32(channel_id) % 64</text>
+  <rect x="350" y="386" width="240" height="52" rx="6" fill="#FFFFFF" stroke="#6B46C1"/>
+  <text x="470" y="408" text-anchor="middle" fill="#44337A" font-size="11" font-weight="600">topic: channel-broadcast-shard-{0..63}</text>
+  <text x="470" y="426" text-anchor="middle" fill="#553C9A" font-size="10">Single publish for 10,000+ member rooms</text>
+
+  <!-- Tier 3 Offline & DLQ -->
+  <rect x="330" y="475" width="280" height="95" rx="8" fill="#FEFCBF" stroke="#D69E2E" stroke-width="1.5"/>
+  <text x="470" y="498" text-anchor="middle" fill="#744210" font-size="12" font-weight="700">Tier 3: Offline &amp; Dead-Letter (DLQ)</text>
+  <text x="470" y="518" text-anchor="middle" fill="#975A16" font-size="11">topic: chat-offline-push (FCM/APNs)</text>
+  <text x="470" y="538" text-anchor="middle" fill="#975A16" font-size="11">topic: chat-delivery-dlq (Retry Exhausted)</text>
+
+  <!-- Right Column: Consumers (Chat Gateway Nodes) -->
+  <rect x="670" y="85" width="260" height="505" rx="10" fill="#FAF5FF" stroke="#805AD5" stroke-width="1.5"/>
+  <text x="800" y="112" text-anchor="middle" fill="#553C9A" font-size="13" font-weight="700">3. Stateful Gateway Consumers</text>
+
+  <rect x="690" y="140" width="220" height="80" rx="8" fill="#E9D8FD" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="800" y="165" text-anchor="middle" fill="#44337A" font-size="12" font-weight="700">Chat Gateway Pod 001</text>
+  <text x="800" y="183" text-anchor="middle" fill="#553C9A" font-size="10">Sub: sub-chat-node-001</text>
+  <text x="800" y="200" text-anchor="middle" fill="#553C9A" font-size="10">Pushes to Local Sockets [User B, C]</text>
+
+  <rect x="690" y="240" width="220" height="80" rx="8" fill="#E9D8FD" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="800" y="265" text-anchor="middle" fill="#44337A" font-size="12" font-weight="700">Chat Gateway Pod 002</text>
+  <text x="800" y="283" text-anchor="middle" fill="#553C9A" font-size="10">Sub: sub-chat-node-002</text>
+  <text x="800" y="300" text-anchor="middle" fill="#553C9A" font-size="10">Pushes to Local Sockets [User D]</text>
+
+  <rect x="690" y="340" width="220" height="80" rx="8" fill="#E9D8FD" stroke="#6B46C1" stroke-width="1.5"/>
+  <text x="800" y="365" text-anchor="middle" fill="#44337A" font-size="12" font-weight="700">Chat Gateway Pod 250</text>
+  <text x="800" y="383" text-anchor="middle" fill="#553C9A" font-size="10">Sub: sub-chat-node-250</text>
+  <text x="800" y="400" text-anchor="middle" fill="#553C9A" font-size="10">Local Map: channel_id -&gt; Set&lt;Socket&gt;</text>
+
+  <rect x="690" y="475" width="220" height="95" rx="8" fill="#C6F6D5" stroke="#2F855A" stroke-width="1.5"/>
+  <text x="800" y="502" text-anchor="middle" fill="#22543D" font-size="12" font-weight="700">Offline Push Worker Pool</text>
+  <text x="800" y="522" text-anchor="middle" fill="#276749" font-size="10">Sub: sub-chat-offline-push</text>
+  <text x="800" y="540" text-anchor="middle" fill="#276749" font-size="10">Dispatches APNs / FCM / WebPush</text>
+
+  <!-- Connections -->
+  <line x1="250" y1="170" x2="326" y2="184" stroke="#C53030" stroke-width="2" marker-end="url(#arr-red)"/>
+  <line x1="250" y1="185" x2="326" y2="230" stroke="#C53030" stroke-width="2" marker-end="url(#arr-red)"/>
+  <line x1="250" y1="205" x2="326" y2="405" stroke="#6B46C1" stroke-width="2" marker-end="url(#arr-purple)"/>
+
+  <line x1="590" y1="184" x2="686" y2="180" stroke="#C53030" stroke-width="2" marker-end="url(#arr-red)"/>
+  <line x1="590" y1="230" x2="686" y2="275" stroke="#C53030" stroke-width="2" marker-end="url(#arr-red)"/>
+  <line x1="590" y1="276" x2="686" y2="375" stroke="#C53030" stroke-width="2" marker-end="url(#arr-red)"/>
+
+  <line x1="590" y1="405" x2="686" y2="195" stroke="#6B46C1" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#arr-purple)"/>
+  <line x1="590" y1="412" x2="686" y2="290" stroke="#6B46C1" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#arr-purple)"/>
+  <line x1="590" y1="420" x2="686" y2="390" stroke="#6B46C1" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#arr-purple)"/>
+
+  <line x1="610" y1="520" x2="686" y2="520" stroke="#2D3748" stroke-width="2" marker-end="url(#arr-dark)"/>
+</svg>
